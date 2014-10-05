@@ -5,7 +5,7 @@ public abstract class MathModule {
 
 	public abstract String getName();
 
-	final double process(Integer... args) {
+	public final double process(Integer... args) {
 		double res = getInitializer();
 
 		for (Integer arg : args) {
