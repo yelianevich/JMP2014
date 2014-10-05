@@ -6,7 +6,7 @@ public class Sum extends MathModule {
 
 	@Override
 	public String getName() {
-		return "Sum";
+		return "sum";
 	}
 
 	@Override

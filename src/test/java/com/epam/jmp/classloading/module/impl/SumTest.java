@@ -13,7 +13,7 @@ public class SumTest {
 	
 	@Test
 	public void shouldReturnNameSum() {
-		assertThat(sum.getName(), is("Sum"));
+		assertThat(sum.getName(), is("sum"));
 	}
 	
 	@Test

@@ -13,7 +13,7 @@ public class MultiplyTest {
 
 	@Test
 	public void shouldReturnNameMultiply() {
-		assertThat(mul.getName(), is("Multiply"));
+		assertThat(mul.getName(), is("mul"));
 	}
 
 	@Test

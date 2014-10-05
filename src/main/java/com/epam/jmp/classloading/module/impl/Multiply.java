@@ -6,7 +6,7 @@ public class Multiply extends MathModule {
 
 	@Override
 	public String getName() {
-		return "Multiply";
+		return "mul";
 	}
 
 	@Override
