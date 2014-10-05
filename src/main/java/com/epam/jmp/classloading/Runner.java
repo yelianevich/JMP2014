@@ -19,9 +19,9 @@ public class Runner {
 	public static void main(String[] args) {
 		LOG.info("Starting app");
 
-		String modulePath = args[0];
+		String jarPath = args[0];
 
-		ModuleEngine engine = new ModuleEngine(modulePath);
+		ModuleEngine engine = new ModuleEngine(jarPath);
 		Map<String, MathModule> modules = Collections.emptyMap();
 		try {
 			modules = engine.loadModules();
@@ -39,7 +39,6 @@ public class Runner {
 				String moduleName = scanner.nextLine();
 
 				MathModule module = modules.get(moduleName);
-
 				if (module == null) {
 					LOG.info("Operation not found");
 					continue;
@@ -48,15 +47,19 @@ public class Runner {
 				LOG.info("Please specify operation arguments");
 				String argsInput = scanner.nextLine();
 
-				List<Integer> xs = new ArrayList<>();
-				try (Scanner intScanner = new Scanner(argsInput)) {
-					while (intScanner.hasNextInt()) {
-						xs.add(intScanner.nextInt());
-					}
-				}
-				Integer[] ops = xs.toArray(new Integer[0]);
+				Integer[] ops = parseInts(argsInput);
 				LOG.info(module.process(ops));
 			}
 		}
+	}
+
+	private static Integer[] parseInts(String argsInput) {
+		List<Integer> xs = new ArrayList<>();
+		try (Scanner intScanner = new Scanner(argsInput)) {
+			while (intScanner.hasNextInt()) {
+				xs.add(intScanner.nextInt());
+			}
+		}
+		return xs.toArray(new Integer[0]);
 	}
 }
