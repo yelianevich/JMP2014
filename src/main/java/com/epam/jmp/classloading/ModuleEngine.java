@@ -1,7 +1,6 @@
 package com.epam.jmp.classloading;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +13,7 @@ import org.apache.logging.log4j.Logger;
 import com.epam.jmp.classloading.module.MathModule;
 
 public class ModuleEngine {
-	private static final Logger LOG = LogManager.getLogger(ModuleEngine.class
-			.getName());
+	private static final Logger LOG = LogManager.getLogger(ModuleEngine.class.getName());
 
 	private String pathToJarFile;
 	private ClassLoader classLoader;
@@ -25,7 +23,7 @@ public class ModuleEngine {
 		this.classLoader = new ModuleLoader(pathToJarDir);
 	}
 
-	public Map<String, MathModule> loadModules() throws MalformedURLException {
+	public Map<String, MathModule> loadModules() {
 		Map<String, MathModule> modules = new HashMap<>();
 
 		try (JarFile jarFile = new JarFile(pathToJarFile)) {
@@ -37,7 +35,8 @@ public class ModuleEngine {
 					continue;
 				}
 				String entryName = jarEntry.getName();
-				String className = entryName.substring(0, entryName.length() - 6);
+				String className = entryName.substring(0,
+						entryName.length() - 6);
 				className = className.replace('/', '.');
 
 				Class<?> clazz = classLoader.loadClass(className);
