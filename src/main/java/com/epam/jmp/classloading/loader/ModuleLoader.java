@@ -1,4 +1,4 @@
-package com.epam.jmp.classloading;
+package com.epam.jmp.classloading.loader;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

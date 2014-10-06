@@ -9,6 +9,7 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.epam.jmp.classloading.loader.ModuleEngine;
 import com.epam.jmp.classloading.module.MathModule;
 
 public class Runner {

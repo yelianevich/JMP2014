@@ -1,4 +1,4 @@
-package com.epam.jmp.classloading;
+package com.epam.jmp.classloading.loader;
 
 import java.io.IOException;
 import java.util.Enumeration;
