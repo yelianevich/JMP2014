@@ -12,17 +12,17 @@ public class MultiplyTest {
 	private MathModule mul = new Multiply();
 
 	@Test
-	public void shouldReturnNameMultiply() {
+	public void shouldReturnNameMul() {
 		assertThat(mul.getName(), is("mul"));
 	}
 
 	@Test
-	public void twoTimesTwoIsFour() throws Exception {
+	public void twoTimesTwoIsFour() {
 		assertThat(mul.process(2, 2), is(4.0));
 	}
 
 	@Test
-	public void twoTimesTwoTimesTwoIsEight() throws Exception {
+	public void twoTimesTwoTimesTwoIsEight() {
 		assertThat(mul.process(2, 2, 2), is(8.0));
 	}
 

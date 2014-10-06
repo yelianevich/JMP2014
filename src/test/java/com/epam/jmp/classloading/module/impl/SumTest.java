@@ -22,7 +22,7 @@ public class SumTest {
 	}
 	
 	@Test
-	public void onePlusOnePlusThreeIsFive() throws Exception {
+	public void onePlusOnePlusThreeIsFive() {
 		assertThat(sum.process(1,1,3), is(5.0));
 	}
 
