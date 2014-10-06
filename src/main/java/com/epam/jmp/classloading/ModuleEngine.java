@@ -2,8 +2,6 @@ package com.epam.jmp.classloading;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,30 +16,33 @@ import com.epam.jmp.classloading.module.MathModule;
 public class ModuleEngine {
 	private static final Logger LOG = LogManager.getLogger(ModuleEngine.class
 			.getName());
+
 	private String pathToJarFile;
+	private ClassLoader classLoader;
 
 	public ModuleEngine(String pathToJarDir) {
 		this.pathToJarFile = pathToJarDir;
+		this.classLoader = new ModuleLoader(pathToJarDir);
 	}
 
 	public Map<String, MathModule> loadModules() throws MalformedURLException {
-		URL[] urls = { new URL("jar:file:" + pathToJarFile + "!/") };
-		ClassLoader cl = URLClassLoader.newInstance(urls);
-		Map<String, MathModule> modules = new HashMap<String, MathModule>();
+		Map<String, MathModule> modules = new HashMap<>();
 
 		try (JarFile jarFile = new JarFile(pathToJarFile)) {
 			Enumeration<JarEntry> jarEntries = jarFile.entries();
 			while (jarEntries.hasMoreElements()) {
 				JarEntry jarEntry = (JarEntry) jarEntries.nextElement();
-				if (jarEntry.isDirectory()
-						|| !jarEntry.getName().endsWith(".class")) {
+				boolean hasNoClassExt = !jarEntry.getName().endsWith(".class");
+				if (hasNoClassExt || jarEntry.isDirectory()) {
 					continue;
 				}
-				String className = jarEntry.getName().substring(0,
-						jarEntry.getName().length() - 6);
+				String entryName = jarEntry.getName();
+				String className = entryName.substring(0, entryName.length() - 6);
 				className = className.replace('/', '.');
-				Class<?> clazz = cl.loadClass(className);
-				if (MathModule.class.isAssignableFrom(clazz)) {
+
+				Class<?> clazz = classLoader.loadClass(className);
+				LOG.info(className + " was loaded by " + clazz.getClassLoader());
+				if (MathModule.class.isAssignableFrom(clazz) && !clazz.isInterface()) {
 					MathModule module = (MathModule) clazz.newInstance();
 					modules.put(module.getName(), module);
 				}
