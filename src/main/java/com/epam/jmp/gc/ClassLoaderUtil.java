@@ -8,10 +8,9 @@ import java.io.InputStream;
  * User: Ivan_Spresov Date: 3/7/14
  */
 public class ClassLoaderUtil {
-	public static byte[] loadByteCode(Class<?> loader, String className)
-			throws IOException {
+	public static byte[] loadByteCode(Class<?> clazz, String className) throws IOException {
 		String fileName = "/" + className.replaceAll("\\.", "/") + ".class";
-		InputStream is = loader.getResourceAsStream(fileName);
+		InputStream is = clazz.getResourceAsStream(fileName);
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream(4096);
 		byte[] buff = new byte[1024];
 		int i;
