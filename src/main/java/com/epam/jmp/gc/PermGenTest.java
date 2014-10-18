@@ -10,14 +10,11 @@ public class PermGenTest {
 		MyClassLoader loader = new MyClassLoader();
 		for (long index = 0; index < Long.MAX_VALUE; index++) {
 			String newClassName = "_"
-					+ String.format("%0" + (clazz.getSimpleName().length() - 1)
-							+ "d", index);
-			byte[] newClassData = new String(buffer, "latin1").replaceAll(
-					clazz.getSimpleName(), newClassName).getBytes("latin1");
+					+ String.format("%0" + (clazz.getSimpleName().length() - 1) + "d", index);
+			byte[] newClassData = new String(buffer, "latin1").replaceAll(clazz.getSimpleName(),
+					newClassName).getBytes("latin1");
 			loader = new MyClassLoader();
-			loader._defineClass(
-					clazz.getName()
-							.replace(clazz.getSimpleName(), newClassName),
+			loader._defineClass(clazz.getName().replace(clazz.getSimpleName(), newClassName),
 					newClassData);
 		}
 	}

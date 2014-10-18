@@ -30,4 +30,9 @@ public class ClassWithStatic {
 		LOG.info("static logical block 2");
 		staticInt = 999;
 	}
+
+	@Override
+	public String toString() {
+		return "ClassWithStatic [instInt=" + instInt + "]";
+	}
 }

@@ -10,7 +10,7 @@ public class MemoryEater {
 	static final Logger logger = LogManager.getLogger(MemoryEater.class);
 
 	public static void main(String[] args) {
-		List v = new ArrayList();
+		List<byte[]> v = new ArrayList<>();
 		while (true) {
 			byte b[] = new byte[1048576];
 			v.add(b);

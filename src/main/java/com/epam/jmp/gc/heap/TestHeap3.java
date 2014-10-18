@@ -10,7 +10,7 @@ public class TestHeap3 {
 	static Logger logger = LogManager.getLogger(TestHeap3.class);
 
 	public static void main(String[] args) {
-		List<Object> list = new ArrayList();
+		List<Object> list = new ArrayList<>();
 		while (true) {
 			list.add(new long[3000]);
 			if (list.size() > 100) {
