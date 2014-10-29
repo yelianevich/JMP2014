@@ -1,6 +1,8 @@
-package com.epam.jmp.concurrency.impl;
+package com.epam.jmp.concurrency.job;
 
+import com.epam.jmp.concurrency.files.FolderReader;
 import com.epam.jmp.util.Config;
+
 import static com.epam.jmp.util.Config.INPUT_FOLDER;;
 
 public class ImportJob implements Runnable {

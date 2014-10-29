@@ -1,4 +1,4 @@
-package com.epam.jmp.concurrency.impl;
+package com.epam.jmp.concurrency.files;
 
 import java.io.IOException;
 import java.nio.file.FileVisitResult;

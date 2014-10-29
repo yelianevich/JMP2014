@@ -15,6 +15,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.epam.jmp.concurrency.job.NewsImportProcessor;
+import com.epam.jmp.concurrency.service.LocalNewsService;
+import com.epam.jmp.concurrency.service.NewsService;
 import com.epam.jmp.test.util.TestData;
 
 public class NewsImportProcessorTest {

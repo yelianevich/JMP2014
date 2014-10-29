@@ -1,4 +1,4 @@
-package com.epam.jmp.concurrency.impl;
+package com.epam.jmp.concurrency.job;
 
 import static java.nio.file.StandardCopyOption.ATOMIC_MOVE;
 
@@ -11,6 +11,9 @@ import java.util.concurrent.Callable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.epam.jmp.concurrency.model.News;
+import com.epam.jmp.concurrency.service.LocalNewsService;
+import com.epam.jmp.concurrency.service.NewsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 

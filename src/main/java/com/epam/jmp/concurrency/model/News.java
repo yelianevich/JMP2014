@@ -1,4 +1,4 @@
-package com.epam.jmp.concurrency.impl;
+package com.epam.jmp.concurrency.model;
 
 import java.util.List;
 

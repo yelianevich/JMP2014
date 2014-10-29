@@ -15,6 +15,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.epam.jmp.concurrency.files.FolderReader;
+
 public class FolderReaderTest {
 	private static final Logger LOG = LogManager.getLogger(FolderReaderTest.class);
 	private FolderReader folderReader;
