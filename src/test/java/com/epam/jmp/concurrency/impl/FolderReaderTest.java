@@ -62,7 +62,7 @@ public class FolderReaderTest {
 				LOG.error("Cannot delete file " + path.getFileName());
 			}
 		});
-		Files.delete(subDir);
-		Files.delete(dir);
+		Files.deleteIfExists(subDir);
+		Files.deleteIfExists(dir);
 	}
 }
