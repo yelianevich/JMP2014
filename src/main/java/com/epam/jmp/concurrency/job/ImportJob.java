@@ -1,19 +1,62 @@
 package com.epam.jmp.concurrency.job;
 
-import com.epam.jmp.concurrency.files.FolderReader;
+import static com.epam.jmp.util.Config.ERROR_FOLDER;
+import static com.epam.jmp.util.Config.READ_TIMEOUT;
+import static com.epam.jmp.util.Config.THREADS_COUNT;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.epam.jmp.concurrency.files.FilesReader;
+import com.epam.jmp.concurrency.service.NewsService;
 import com.epam.jmp.util.Config;
 
-import static com.epam.jmp.util.Config.INPUT_FOLDER;;
-
 public class ImportJob implements Runnable {
+	private static final Logger LOG = LogManager.getLogger(ImportJob.class);
+	private final ScheduledExecutorService scheduler;
+	private final FilesReader filesReader;
+	private final NewsService newsService;
+	private final ExecutorService executor;
+
+	public ImportJob(FilesReader filesReader, NewsService newsService) {
+		this.filesReader = filesReader;
+		this.newsService = newsService;
+		scheduler = Executors.newSingleThreadScheduledExecutor(run -> {
+			Thread t = new Thread(run, "TransactionReader");
+			t.setDaemon(true);
+			return t;
+		});
+		int threadsCount = Integer.parseInt(Config.INST.prop(THREADS_COUNT));
+		this.executor = Executors.newFixedThreadPool(threadsCount);
+	}
 
 	@Override
 	public void run() {
-		String dir = Config.INST.prop(INPUT_FOLDER);
-		FolderReader reader = new FolderReader(dir);
-		ReaderJob readerJob = new ReaderJob(reader);
-		readerJob.run();
+		long readTimeout = Long.parseLong(Config.INST.prop(READ_TIMEOUT));
+		Path errorDir = Paths.get(Config.INST.prop(ERROR_FOLDER));
+		scheduler.scheduleWithFixedDelay(new Runnable() {
 
+			@Override
+			public void run() {
+				LOG.info("Import started");
+				List<Path> files = filesReader.readFiles();
+				LOG.info(files.size() + " files to import");
+				files.forEach(file -> {
+					Callable<Boolean> importTast = new NewsImportProcessor(file, errorDir,
+							newsService);
+					executor.submit(importTast);
+				});
+			}
+
+		}, readTimeout, readTimeout, TimeUnit.SECONDS);
 	}
-
 }

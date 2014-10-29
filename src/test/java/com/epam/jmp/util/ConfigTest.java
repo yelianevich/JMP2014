@@ -4,6 +4,9 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -19,13 +22,15 @@ public class ConfigTest {
 
 	@Test
 	public void shouldReturnInputFolder() {
-		String path = Config.INST.prop(Config.INPUT_FOLDER);
+		String pathStr = Config.INST.prop(Config.INPUT_FOLDER);
+		Path path = Paths.get(pathStr);
 		assertThat(path, notNullValue());
 	}
 
 	@Test
 	public void shouldReturnErrorFolder() throws Exception {
-		String path = Config.INST.prop(Config.ERROR_FOLDER);
+		String pathStr = Config.INST.prop(Config.ERROR_FOLDER);
+		Path path = Paths.get(pathStr);
 		assertThat(path, notNullValue());
 	}
 

@@ -32,7 +32,7 @@ public class FolderReader implements FilesReader {
 		try {
 			Files.walkFileTree(repoPath, filesVisitor);
 		} catch (IOException e) {
-			LOG.error("Error during inout folder reading");
+			LOG.error("Error during inout folder reading", e);
 		}
 		return filesVisitor.getFiles();
 	}
