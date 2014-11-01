@@ -1,5 +1,6 @@
 package com.epam.jmp.memory.cache.service;
 
+import static org.hamcrest.CoreMatchers.isA;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
@@ -9,13 +10,14 @@ import org.junit.Test;
 
 public class WebImageProviderTest {
 
-	private static final String IMG_GOSLING = "https://upload.wikimedia.org/wikipedia/commons/1/14/James_Gosling_2008.jpg";
+	private static final String TRICKY = "https://upload.wikimedia.org/wikipedia/commons/d/df/Tricky_%40_INmusic_festival.jpg";
 	private ImageProvider provider = new WebImageProvider();
 
 	@Test
 	public void shouldReturnExistingImage() {
-		Image image = provider.loadImage(IMG_GOSLING);
+		Image image = provider.loadImage(TRICKY);
 		assertThat(image, notNullValue());
+		assertThat(image, isA(Image.class));
 	}
 
 }
