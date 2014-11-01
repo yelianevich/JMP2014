@@ -1,7 +1,11 @@
 package com.epam.jmp.concurrency.impl;
 
+import static org.mockito.Matchers.any;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,8 +20,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.epam.jmp.concurrency.job.NewsImportProcessor;
-import com.epam.jmp.concurrency.service.LocalNewsService;
-import com.epam.jmp.concurrency.service.NewsService;
+import com.epam.jmp.concurrency.model.News;
+import com.epam.jmp.concurrency.model.service.LocalNewsService;
+import com.epam.jmp.concurrency.model.service.NewsService;
 import com.epam.jmp.test.util.TestData;
 
 public class NewsImportProcessorTest {
@@ -25,7 +30,7 @@ public class NewsImportProcessorTest {
 	private NewsImportProcessor importProcessor;
 	private Path newsFile = Paths.get("tempXmlFile");
 	private Path errorDir = Paths.get("errorDir");
-	private NewsService newsService = new LocalNewsService();
+	private NewsService newsService;
 
 	@Before
 	public void setUp() throws Exception {
@@ -34,23 +39,26 @@ public class NewsImportProcessorTest {
 
 		Files.deleteIfExists(errorDir);
 		errorDir = Files.createDirectory(errorDir);
+
+		newsService = mock(NewsService.class);
+		when(newsService.upsertNews(any(News.class))).then((invocation) -> {
+			LOG.info("upsert " + invocation.getArguments()[0]);
+			return true;
+		});
 		importProcessor = new NewsImportProcessor(newsFile, errorDir, newsService);
 	}
 
 	@Test
-	public void test() {
+	public void shouldImportNews() {
 		Boolean imported = importProcessor.call();
 		assertThat(imported, is(true));
+		verify(newsService).upsertNews(any(News.class));
 	}
 
 	@After
 	public void tearDown() throws IOException {
-		if (!Files.deleteIfExists(newsFile)) {
-			LOG.info("News file was deleted");
-		}
-		if (!Files.deleteIfExists(errorDir.resolve(newsFile))) {
-			LOG.info("Error dir was empty. No error news files.");
-		}
+		Files.deleteIfExists(newsFile);
+		Files.deleteIfExists(errorDir.resolve(newsFile));
 		Files.deleteIfExists(errorDir);
 	}
 }
