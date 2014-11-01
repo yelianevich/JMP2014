@@ -1,9 +1,8 @@
 package com.epam.jmp.concurrency.impl;
 
-import static org.mockito.Matchers.any;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -18,6 +17,9 @@ import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import com.epam.jmp.concurrency.job.NewsImportProcessor;
 import com.epam.jmp.concurrency.model.News;
@@ -25,12 +27,13 @@ import com.epam.jmp.concurrency.model.service.LocalNewsService;
 import com.epam.jmp.concurrency.model.service.NewsService;
 import com.epam.jmp.test.util.TestData;
 
+@RunWith(MockitoJUnitRunner.class)
 public class NewsImportProcessorTest {
 	private Logger LOG = LogManager.getLogger(LocalNewsService.class);
 	private NewsImportProcessor importProcessor;
 	private Path newsFile = Paths.get("tempXmlFile");
 	private Path errorDir = Paths.get("errorDir");
-	private NewsService newsService;
+	@Mock private NewsService newsService;
 
 	@Before
 	public void setUp() throws Exception {
@@ -40,7 +43,6 @@ public class NewsImportProcessorTest {
 		Files.deleteIfExists(errorDir);
 		errorDir = Files.createDirectory(errorDir);
 
-		newsService = mock(NewsService.class);
 		when(newsService.upsertNews(any(News.class))).then((invocation) -> {
 			LOG.info("upsert " + invocation.getArguments()[0]);
 			return true;
