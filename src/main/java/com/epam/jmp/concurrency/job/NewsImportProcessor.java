@@ -10,8 +10,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.epam.jmp.concurrency.model.News;
-import com.epam.jmp.concurrency.service.LocalNewsService;
-import com.epam.jmp.concurrency.service.NewsService;
+import com.epam.jmp.concurrency.model.service.LocalNewsService;
+import com.epam.jmp.concurrency.model.service.NewsService;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

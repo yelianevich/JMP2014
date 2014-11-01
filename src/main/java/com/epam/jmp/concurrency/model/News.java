@@ -8,17 +8,27 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 @JacksonXmlRootElement(localName = "news")
 public class News {
 
-	@JacksonXmlProperty(localName="title")
+	private int id;
+
+	@JacksonXmlProperty(localName = "title")
 	private String title;
 
-	@JacksonXmlProperty(localName="short_text")
+	@JacksonXmlProperty(localName = "short_text")
 	private String shortText;
 
-	@JacksonXmlProperty(localName="full_text")
+	@JacksonXmlProperty(localName = "full_text")
 	private String fullText;
 
 	@JacksonXmlProperty(localName = "tags")
 	private List<String> tags;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getTitle() {
 		return title;
@@ -57,6 +67,7 @@ public class News {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((fullText == null) ? 0 : fullText.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((shortText == null) ? 0 : shortText.hashCode());
 		result = prime * result + ((tags == null) ? 0 : tags.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -76,6 +87,8 @@ public class News {
 			if (other.fullText != null)
 				return false;
 		} else if (!fullText.equals(other.fullText))
+			return false;
+		if (id != other.id)
 			return false;
 		if (shortText == null) {
 			if (other.shortText != null)
@@ -97,8 +110,8 @@ public class News {
 
 	@Override
 	public String toString() {
-		return "News [title=" + title + ", shortText=" + shortText + ", fullText=" + fullText
-				+ ", tags=" + tags + "]";
+		return "News [id=" + id + ", title=" + title + ", shortText=" + shortText + ", fullText="
+				+ fullText + ", tags=" + tags + "]";
 	}
 
 }

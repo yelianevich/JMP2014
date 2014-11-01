@@ -17,7 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.epam.jmp.concurrency.files.FilesReader;
-import com.epam.jmp.concurrency.service.NewsService;
+import com.epam.jmp.concurrency.model.service.NewsService;
 import com.epam.jmp.util.Config;
 
 public class ImportJob implements Runnable {

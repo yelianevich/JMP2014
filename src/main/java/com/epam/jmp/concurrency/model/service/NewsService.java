@@ -1,4 +1,4 @@
-package com.epam.jmp.concurrency.service;
+package com.epam.jmp.concurrency.model.service;
 
 import com.epam.jmp.concurrency.model.News;
 
