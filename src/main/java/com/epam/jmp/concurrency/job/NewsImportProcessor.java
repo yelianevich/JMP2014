@@ -1,7 +1,5 @@
 package com.epam.jmp.concurrency.job;
 
-import static java.nio.file.StandardCopyOption.ATOMIC_MOVE;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,6 +12,8 @@ import org.apache.logging.log4j.Logger;
 import com.epam.jmp.concurrency.model.News;
 import com.epam.jmp.concurrency.service.LocalNewsService;
 import com.epam.jmp.concurrency.service.NewsService;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
@@ -44,19 +44,12 @@ public class NewsImportProcessor implements Callable<Boolean> {
 			newsService.upsertNews(news);
 			Files.delete(file);
 			imported = true;
-		} catch (IOException e) {
-			LOG.error(file + " is not valid. Move to error folder.", e);
-			try {
-				Files.move(file, errorDir.resolve(file.getFileName()), ATOMIC_MOVE);
-				moved = true;
-			} catch (IOException e1) {
-				LOG.error("Cannot move file " + file, e);
-				try {
-					Files.deleteIfExists(file);
-				} catch (IOException e2) {
-					LOG.error("Cannot delete file " + file, e);
-				}
-			}
+		} catch (JsonMappingException | JsonParseException e) {
+			moved = Cleaner.handleImportError(e, file, errorDir);
+		}
+		catch (IOException e) {
+			LOG.error("Import failed", e);
+			throw new RuntimeException(e);
 		}
 		return imported;
 	}
