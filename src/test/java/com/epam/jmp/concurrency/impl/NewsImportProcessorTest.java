@@ -2,9 +2,9 @@ package com.epam.jmp.concurrency.impl;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -43,7 +43,7 @@ public class NewsImportProcessorTest {
 		Files.deleteIfExists(errorDir);
 		errorDir = Files.createDirectory(errorDir);
 
-		when(newsService.upsertNews(any(News.class))).then((invocation) -> {
+		given(newsService.upsertNews(any(News.class))).willAnswer((invocation) -> {
 			LOG.info("upsert " + invocation.getArguments()[0]);
 			return true;
 		});

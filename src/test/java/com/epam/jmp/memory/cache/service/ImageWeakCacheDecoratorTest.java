@@ -2,8 +2,8 @@ package com.epam.jmp.memory.cache.service;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.awt.Image;
 import java.lang.ref.WeakReference;
@@ -26,7 +26,7 @@ public class ImageWeakCacheDecoratorTest {
 
 	@Before
 	public void setUp() {
-		when(realProvider.loadImage(IMG_GOSLING)).thenReturn(sampleImage);
+		given(realProvider.loadImage(IMG_GOSLING)).willReturn(sampleImage);
 
 		@SuppressWarnings("unchecked")
 		Class<? extends WeakReference<Image>> refType = (Class<? extends WeakReference<Image>>) WeakReference.class;
@@ -34,14 +34,14 @@ public class ImageWeakCacheDecoratorTest {
 	}
 
 	@Test
-	public void returnExistingImage() {
+	public void shouldReturnExistingImage() {
 		Image image = imageCacheProvider.loadImage(IMG_GOSLING);
 		assertThat(image, is(sampleImage));
 		verify(realProvider).loadImage(IMG_GOSLING);
 	}
 
 	@Test
-	public void returnImageWithOneCallToReadImageProvider() throws Exception {
+	public void shouldReturnImageWithOneCallToReadImageProvider() throws Exception {
 		Image image = imageCacheProvider.loadImage(IMG_GOSLING);
 		image = imageCacheProvider.loadImage(IMG_GOSLING);
 		assertThat(image, is(sampleImage));
