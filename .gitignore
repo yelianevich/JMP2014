@@ -1,15 +1,12 @@
 # Build Files #
-
 Projects/
 bin/
 target/
 build/
 
 # Eclipse Project Files #
-
 .classpath
 .settings
 
 # Logs
-
 *.log
