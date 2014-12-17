@@ -3,6 +3,7 @@ Projects/
 bin/
 target/
 build/
+.gradle
 
 # Eclipse Project Files #
 .classpath
