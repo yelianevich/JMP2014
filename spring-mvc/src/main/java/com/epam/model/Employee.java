@@ -3,57 +3,100 @@ package com.epam.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.epam.model.json.LocalDateDeserializer;
+import com.epam.model.json.LocalDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@Entity
 public class Employee {
-	private long id;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
+	@Column(length = 128)
 	private String firstname;
+
+	@Column(length = 128)
 	private String lastname;
+
+	@Column
 	private Sex sex;
+
+	@Column
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@JsonDeserialize(using = LocalDateDeserializer.class)
 	private LocalDate started;
+
+	@Column(length = 256)
 	private String position;
+
+	@Column
 	private BigDecimal salary;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public String getFirstname() {
 		return firstname;
 	}
+
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
+
 	public String getLastname() {
 		return lastname;
 	}
+
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+
 	public Sex getSex() {
 		return sex;
 	}
+
 	public void setSex(Sex sex) {
 		this.sex = sex;
 	}
+
 	public LocalDate getStarted() {
 		return started;
 	}
+
 	public void setStarted(LocalDate started) {
 		this.started = started;
 	}
+
 	public String getPosition() {
 		return position;
 	}
+
 	public void setPosition(String position) {
 		this.position = position;
 	}
+
 	public BigDecimal getSalary() {
 		return salary;
 	}
+
 	public void setSalary(BigDecimal salary) {
 		this.salary = salary;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -67,6 +110,7 @@ public class Employee {
 		result = prime * result + ((started == null) ? 0 : started.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -107,6 +151,7 @@ public class Employee {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", sex=" + sex
