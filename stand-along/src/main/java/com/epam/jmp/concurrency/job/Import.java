@@ -5,7 +5,6 @@ import static com.epam.jmp.util.Config.INPUT_FOLDER;
 import com.epam.jmp.concurrency.db.Jdbc;
 import com.epam.jmp.concurrency.files.FolderReader;
 import com.epam.jmp.concurrency.model.dao.HsqldbNewsDao;
-import com.epam.jmp.concurrency.model.dao.NewsDao;
 import com.epam.jmp.concurrency.model.dao.NewsMapper;
 import com.epam.jmp.concurrency.model.service.LocalNewsService;
 import com.epam.jmp.concurrency.model.service.NewsService;
