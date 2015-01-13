@@ -8,21 +8,62 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   </head>
   <body>
-    <div ng-controller="EmployeeController as company">
+    <div ng-controller="EmployeesController as company">
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="employee in company.employees | orderBy:'firstname'">
-                <h1>
-                    {{employee.firstname | uppercase}} {{employee.lastname | uppercase}}
-                    <em class="pull-right">{{employee.salary | currency}}</em>
-                </h1>
-                <p>{{employee.position}}, {{employee.sex}}</p>
-                
-                <p>{{employee.started}}</p>
-                <button>Edit</button>
-                <button>Delete</button>
+            <li class="list-group-item" ng-repeat="employee in company.employees | orderBy:'firstname'" ng-controller="EmployeeController as emplForm">
+                <section ng-show="emplForm.viewing()">
+                    <h1>
+                        {{employee.firstname | uppercase}} {{employee.lastname | uppercase}}
+                        <em class="pull-right">{{employee.salary | currency}}</em>
+                    </h1>
+                    <p>{{employee.position}}, {{employee.sex}}</p>
+                    
+                    <p>{{employee.started}}</p>
+                    <button ng-click="emplForm.edit(employee)">Edit</button>
+                    <button ng-click="emplForm.delete(employee)">Delete</button>
+                </section>
+                <section ng-show="emplForm.editing()">
+                    <h1>Edit Employee Information</h1>
+                    <form name="editEmployeeForm" ng-controller="AddEmployeeController as addEmployeeCtrl"
+                                ng-submit="addEmployeeCtrl.addEmployee()">
+                        <label>First Name</label>
+                        <input type="text" ng-model="employee.firstname">
+                        <label>Last Name</label>
+                        <input type="text" ng-model="employee.lastname">
+                        <label>Salary</label>
+                        <input type="text" ng-model="employee.salary">
+                        <label>Position</label>
+                        <input type="text" ng-model="employee.position">
+                        <label>Started</label>
+                        <input type="date" ng-model="employee.started" formatDate>
+                        <select ng-model="employee.sex">
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                        </select>
+                        <input type="submit" ng-click="emplForm.save(employee)" value="Save" />
+                        <input type="submit" ng-click="emplForm.save(employee)" value="Cancel" />
+                    </form>
+                </section>
             </li>
         </ul>
-        <button>Add New Employee</button>
+        <h1>Add New Employee</h1>
+        <form name="addEmployeeForm" ng-controller="AddEmployeeController as addEmployeeCtrl" ng-submit="addEmployeeCtrl.addEmployee()">
+                <label>First Name</label>
+                <input type="text" ng-model="addEmployeeCtrl.employee.firstname">
+            <label>Last Name</label>
+            <input type="text" ng-model="addEmployeeCtrl.employee.lastname">
+            <label>Salary</label>
+            <input type="text" ng-model="addEmployeeCtrl.employee.salary">
+            <label>Position</label>
+            <input type="text" ng-model="addEmployeeCtrl.employee.position">
+            <label>Started</label>
+            <input type="date" ng-model="addEmployeeCtrl.employee.started">
+            <select ng-model="addEmployeeCtrl.employee.sex">
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+            </select>
+            <input type="submit" value="Add Employee" />
+        </form>
      </div>
   </body>
 </html>
