@@ -1,7 +1,7 @@
 package com.epam.model.json;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import com.fasterxml.jackson.core.JsonParser;
@@ -11,16 +11,16 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.node.TextNode;
 
-public class LocalDateDeserializer extends JsonDeserializer<LocalDate> {
+public class LocalDateDeserializer extends JsonDeserializer<LocalDateTime> {
 
 	@Override
-	public LocalDate deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException,
+	public LocalDateTime deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException,
 			JsonProcessingException {
 		ObjectCodec oc = jp.getCodec();
 		TextNode node = (TextNode) oc.readTree(jp);
 
 		String dateString = node.textValue();
-		LocalDate dateTime = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
+		LocalDateTime dateTime = LocalDateTime.parse(dateString, DateTimeFormatter.ISO_DATE_TIME);
 		return dateTime;
 	}
 

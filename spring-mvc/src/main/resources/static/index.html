@@ -1,69 +1,106 @@
 <!doctype html>
 <html ng-app="employeeManagement">
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-resource.min.js"></script>
-    <script src="js/app.js"></script>
-    <link rel="stylesheet" href="css/app.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-resource.min.js"></script>
+	<script src="js/app.js"></script>
+	<link rel="stylesheet" href="css/app.css" />
   </head>
   <body>
-    <div ng-controller="EmployeesController as company">
-        <ul class="list-group">
-            <li class="list-group-item" ng-repeat="employee in company.employees | orderBy:'firstname'" ng-controller="EmployeeController as emplForm">
-                <section ng-show="emplForm.viewing()">
-                    <h1>
-                        {{employee.firstname | uppercase}} {{employee.lastname | uppercase}}
-                        <em class="pull-right">{{employee.salary | currency}}</em>
-                    </h1>
-                    <p>{{employee.position}}, {{employee.sex}}</p>
-                    
-                    <p>{{employee.started}}</p>
-                    <button ng-click="emplForm.edit(employee)">Edit</button>
-                    <button ng-click="emplForm.delete(employee)">Delete</button>
-                </section>
-                <section ng-show="emplForm.editing()">
-                    <h1>Edit Employee Information</h1>
-                    <form name="editEmployeeForm" ng-controller="AddEmployeeController as addEmployeeCtrl"
-                                ng-submit="addEmployeeCtrl.addEmployee()">
-                        <label>First Name</label>
-                        <input type="text" ng-model="employee.firstname">
-                        <label>Last Name</label>
-                        <input type="text" ng-model="employee.lastname">
-                        <label>Salary</label>
-                        <input type="text" ng-model="employee.salary">
-                        <label>Position</label>
-                        <input type="text" ng-model="employee.position">
-                        <label>Started</label>
-                        <input type="date" ng-model="employee.started" formatDate>
-                        <select ng-model="employee.sex">
-                            <option value="MALE">Male</option>
-                            <option value="FEMALE">Female</option>
-                        </select>
-                        <input type="submit" ng-click="emplForm.save(employee)" value="Save" />
-                        <input type="submit" ng-click="emplForm.save(employee)" value="Cancel" />
-                    </form>
-                </section>
-            </li>
-        </ul>
-        <h1>Add New Employee</h1>
-        <form name="addEmployeeForm" ng-controller="AddEmployeeController as addEmployeeCtrl" ng-submit="addEmployeeCtrl.addEmployee()">
-                <label>First Name</label>
-                <input type="text" ng-model="addEmployeeCtrl.employee.firstname">
-            <label>Last Name</label>
-            <input type="text" ng-model="addEmployeeCtrl.employee.lastname">
-            <label>Salary</label>
-            <input type="text" ng-model="addEmployeeCtrl.employee.salary">
-            <label>Position</label>
-            <input type="text" ng-model="addEmployeeCtrl.employee.position">
-            <label>Started</label>
-            <input type="date" ng-model="addEmployeeCtrl.employee.started">
-            <select ng-model="addEmployeeCtrl.employee.sex">
-                <option value="MALE">Male</option>
-                <option value="FEMALE">Female</option>
-            </select>
-            <input type="submit" value="Add Employee" />
-        </form>
-     </div>
+	<div ng-controller="EmployeesController as company" class="ng-scope">
+		<header>
+			<h1 class="text-center">Employee Management</h1>
+			<h2 class="text-center">Crazy Factory Inc.</h2>
+		</header>
+		<div class="list-group">
+			<div class="list-group-item" ng-repeat="employee in company.employees | orderBy:'firstname'" ng-controller="EmployeeController as emplForm">
+				<section ng-show="emplForm.viewing()">
+					<h1>
+						{{employee.firstname | uppercase}} {{employee.lastname | uppercase}}
+						<em class="pull-right">{{employee.salary | currency}}</em>
+					</h1>
+					<p>{{employee.position}}, {{employee.sex}}</p>
+					
+					<p>{{employee.started | date}}</p>
+					<button class="btn" ng-click="emplForm.edit(employee)">Edit</button>
+					<button class="btn" ng-click="emplForm.delete(employee)">Delete</button>
+				</section>
+				<section ng-show="emplForm.editing()">
+					<h1>Edit Employee Information</h1>
+					<form name="editEmployeeForm" ng-submit="editEmployeeForm.$valid && emplForm.save(employee)" novalidate>
+						<fieldset class="form-group">
+							<label>First Name</label>
+							<input type="text" class="form-control" ng-model="employee.firstname" required>
+						</fieldset>
+						<fieldset class="form-group">
+							<label>Last Name</label>
+							<input type="text" class="form-control" ng-model="employee.lastname" required>
+						</fieldset>
+						<fieldset class="form-group">
+							<label>Salary</label>
+							<input type="number" class="form-control" ng-model="employee.salary" min=100>
+						</fieldset>
+						<fieldset class="form-group">
+							<label>Position</label>
+							<input type="text" class="form-control" ng-model="employee.position">
+						</fieldset>
+						<fieldset class="form-group">
+							<label>Started</label>
+							<input type="date" class="form-control" ng-model="employee.started">
+						</fieldset>
+						<fieldset class="form-group">
+							<select ng-model="employee.sex" class="form-control">
+								<label>Sex</label>
+								<option value="MALE">Male</option>
+								<option value="FEMALE">Female</option>
+							</select>
+						</fieldset>
+						<input type="submit" class="btn btn-primary" value="Save" />
+						<input type="submit" class="btn" ng-click="emplForm.cancel(employee, editEmployeeForm.$dirty)" value="Cancel" />
+					</form>
+				</section>
+			</div>
+		</div>
+		<div ng-controller="AddEmployeeController as addEmployeeCtrl">
+			<section ng-show="addEmployeeCtrl.viewing()">
+				<button class="btn btn-primary" ng-click="addEmployeeCtrl.edit()">Add new employee</button>
+			</section>
+			<section ng-show="addEmployeeCtrl.editing()">
+				<h1>Add New Employee</h1>
+				<form name="addEmployeeForm" ng-submit="addEmployeeForm.$valid && addEmployeeCtrl.addEmployee()" novalidate>
+					<fieldset class="form-group">
+						<label>First Name</label>
+						<input type="text" class="form-control" ng-model="addEmployeeCtrl.employee.firstname" required>
+					</fieldset>
+					<fieldset class="form-group">
+						<label>Last Name</label>
+						<input type="text" class="form-control" ng-model="addEmployeeCtrl.employee.lastname" required>
+					</fieldset>
+					<fieldset class="form-group">
+						<label>Salary</label>
+						<input type="number" class="form-control" ng-model="addEmployeeCtrl.employee.salary" min=100>
+					</fieldset>
+					<fieldset class="form-group">
+						<label>Position</label>
+						<input type="text" class="form-control" ng-model="addEmployeeCtrl.employee.position">
+					</fieldset>
+					<fieldset class="form-group">
+						<label>Started</label>
+						<input type="date" class="form-control" ng-model="addEmployeeCtrl.employee.started">
+					</fieldset>
+					<fieldset class="form-group">
+						<select class="form-control" ng-model="addEmployeeCtrl.employee.sex">
+							<label>Sex</label>
+							<option value="MALE">Male</option>
+							<option value="FEMALE">Female</option>
+						</select>
+					</fieldset>
+					<input type="submit" class="btn btn-primary" value="Add Employee" />
+					<input type="submit" class="btn" ng-click="addEmployeeCtrl.cancel()" value="Cancel" />
+				</form>
+			</section>
+		</div>
+	</div>
   </body>
 </html>

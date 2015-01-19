@@ -1,7 +1,7 @@
 package com.epam.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +33,7 @@ public class Employee {
 	@Column
 	@JsonSerialize(using = LocalDateSerializer.class)
 	@JsonDeserialize(using = LocalDateDeserializer.class)
-	private LocalDate started;
+	private LocalDateTime started;
 
 	@Column(length = 256)
 	private String position;
@@ -73,11 +73,11 @@ public class Employee {
 		this.sex = sex;
 	}
 
-	public LocalDate getStarted() {
+	public LocalDateTime getStarted() {
 		return started;
 	}
 
-	public void setStarted(LocalDate started) {
+	public void setStarted(LocalDateTime started) {
 		this.started = started;
 	}
 

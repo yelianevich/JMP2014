@@ -8,8 +8,7 @@
 			var self = this;
 			$http.get('/employees').success(function(data) {
 				self.employees = data.map(function(employee) {
-					var dateObj = new Date(employee.started);
-					employee.started = dateObj;
+					employee.started = new Date(employee.started);
 					return employee;
 				}) || [];
 			});
@@ -25,20 +24,17 @@
 			this.isEdit = true;
 		};
 
-		this.cancel = function(employeeEdit) {
-			$http.get('/employees/' + employeeEdit.id)
+		this.cancel = function(employeeEdit, isDirty) {
+			isDirty && $http.get('/employees/' + employeeEdit.id)
 				.success(function(employeeSaved) {
 					var dateObj = new Date(employeeSaved.started);
 					employeeSaved.started = dateObj;
 					angular.copy(employeeSaved, employeeEdit);
 				});
-			this.isEdit = false;
 		};
 
 		this.save = function(employeeEdit) {
-			var editCopy = angular.copy(employeeEdit);
-			editCopy.started = employeeEdit.started.toISOString().slice(0, 10);
-			$http.put('/employees', editCopy)
+			$http.put('/employees', employeeEdit)
 				.error(function(){
 					alert("Could not save employee :(");
 				});
@@ -64,17 +60,35 @@
 
 	app.controller('AddEmployeeController', function($http) {
 		this.employee = {};
+		this.isEdit = false;
 
+		this.edit = function() {
+			this.isEdit = true;
+		};
+
+		this.cancel = function() {
+			this.employee = {};
+			this.isEdit = false;
+		};
+
+		this.editing = function() {
+			return this.isEdit === true;
+		};
+
+		this.viewing = function() {
+			return this.isEdit === false;
+		};
+		
 		this.addEmployee = function() {
-			if (this.employee !== {}) {
-				var editCopy = angular.copy(this.employee);
-				editCopy.started = this.employee.started.toISOString().slice(0, 10);
-				$http.post('/employees', editCopy)
-					.error(function(){
-						alert("Could not save new employee :(");
+			var self = this;
+			$http.post('/employees', this.employee)
+				.error(function() {
+					alert("Could not save new employee :(");
+				})
+				.success(function(){
+					self.isEdit = false;
+					self.employee = {};
 				});
-				this.employee = {};
-			}
 		};
 	});
 })();
