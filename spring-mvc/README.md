@@ -11,5 +11,13 @@ DAO layer was implemented using JPA Data project. HSQLDB was used as a relationa
 
 Client side was implemented using Angular JS framework that consume descibed aboce Spring REST service.
 
+# Installation
 
+To run Spring Boot application execute gradle command:
+
+```gradle
+gradle bootRun
+```
+
+Go to `http://localhost:8080` in your browser and have fun!
 
