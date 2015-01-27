@@ -14,22 +14,12 @@
 			<h2 class="text-center">Crazy Factory Inc.</h2>
 		</header>
 		<div class="list-group">
-			<div class="list-group-item" ng-repeat="employee in company.employees | orderBy:'firstname'" ng-controller="EmployeeController as emplForm">
-				<section ng-show="emplForm.viewing()">
-					<employee-view></employee-view>
-				</section>
-				<section ng-show="emplForm.editing()">
-					<employee-edit></employee-edit>
-				</section>
+			<div class="list-group-item" ng-repeat="employee in company.employees | orderBy:'firstname'">
+				<employee-view-edit></employee-view-edit>
 			</div>
 		</div>
-		<div ng-controller="AddEmployeeController as addEmployeeCtrl">
-			<section ng-show="addEmployeeCtrl.viewing()">
-				<button class="btn btn-primary" ng-click="addEmployeeCtrl.edit()">Add new employee</button>
-			</section>
-			<section ng-show="addEmployeeCtrl.editing()">
-				<employee-add></employee-add>
-			</section>
+		<div>
+			<employee-add></employee-add>
 		</div>
 	</div>
   </body>

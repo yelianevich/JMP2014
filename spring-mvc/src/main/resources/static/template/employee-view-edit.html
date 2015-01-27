@@ -1,0 +1,44 @@
+<section ng-show="emplForm.viewing()">
+	<h1>
+		{{employee.firstname | uppercase}} {{employee.lastname | uppercase}}
+		<em class="pull-right">{{employee.salary | currency}}</em>
+	</h1>
+	<p>{{employee.position}}, {{employee.sex}}</p>
+	<p>{{employee.started | date}}</p>
+	<button class="btn" ng-click="emplForm.edit(employee)">Edit</button>
+	<button class="btn" ng-click="emplForm.delete(employee)">Delete</button>
+</section>
+<section ng-show="emplForm.editing()">
+	<h1>Edit Employee Information</h1>
+	<form name="editEmployeeForm" ng-submit="editEmployeeForm.$valid && emplForm.save(employee)" novalidate>
+		<fieldset class="form-group">
+			<label>First Name</label>
+			<input type="text" class="form-control" ng-model="employee.firstname" required>
+		</fieldset>
+		<fieldset class="form-group">
+			<label>Last Name</label>
+			<input type="text" class="form-control" ng-model="employee.lastname" required>
+		</fieldset>
+		<fieldset class="form-group">
+			<label>Salary</label>
+			<input type="number" class="form-control" ng-model="employee.salary" min=100>
+		</fieldset>
+		<fieldset class="form-group">
+			<label>Position</label>
+			<input type="text" class="form-control" ng-model="employee.position">
+		</fieldset>
+		<fieldset class="form-group">
+			<label>Started</label>
+			<input type="date" class="form-control" ng-model="employee.started">
+		</fieldset>
+		<fieldset class="form-group">
+			<select ng-model="employee.sex" class="form-control">
+				<label>Sex</label>
+				<option value="MALE">Male</option>
+				<option value="FEMALE">Female</option>
+			</select>
+		</fieldset>
+		<input type="submit" class="btn btn-primary" value="Save" />
+		<input type="submit" class="btn" ng-click="emplForm.cancel(employee, editEmployeeForm.$dirty)" value="Cancel" />
+	</form>
+</section>
