@@ -1,0 +1,8 @@
+<h1>
+	{{employee.firstname | uppercase}} {{employee.lastname | uppercase}}
+	<em class="pull-right">{{employee.salary | currency}}</em>
+</h1>
+<p>{{employee.position}}, {{employee.sex}}</p>
+<p>{{employee.started | date}}</p>
+<button class="btn" ng-click="emplForm.edit(employee)">Edit</button>
+<button class="btn" ng-click="emplForm.delete(employee)">Delete</button>

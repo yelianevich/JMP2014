@@ -91,4 +91,26 @@
 				});
 		};
 	});
+
+	app.directive('employeeView', function(){
+		return {
+			restrict: 'E',
+			templateUrl: 'template/employee-view.html'
+		};
+	});
+
+	app.directive('employeeEdit', function(){
+		return {
+			restrict: 'E',
+			templateUrl: 'template/employee-edit.html'
+		};
+	});
+
+	app.directive('employeeAdd', function(){
+		return {
+			restrict: 'E',
+			templateUrl: 'template/employee-add.html'
+		};
+	});
+
 })();
