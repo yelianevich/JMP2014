@@ -11,3 +11,4 @@ Task are related to various aspects of JVM, Java SE and Java EE.
 * [Classic Model and Concurrency](https://github.com/yelianevich/JMP2014/tree/master/stand-along/src/main/java/com/epam/jmp/concurrency)
 * [Unit Testing](https://github.com/yelianevich/JMP2014/tree/master/stand-along/src/test/java/com/epam/jmp)
 * [Spring MVC](https://github.com/yelianevich/JMP2014/tree/master/spring-mvc)
+* [JMS](https://github.com/yelianevich/JMP2014/tree/master/jms)
