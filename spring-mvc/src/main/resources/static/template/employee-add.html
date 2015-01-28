@@ -1,0 +1,38 @@
+<section ng-show="addEmployeeCtrl.viewing()">
+	<button class="btn btn-primary" ng-click="addEmployeeCtrl.edit()">Add new employee</button>
+</section>
+<section ng-show="addEmployeeCtrl.editing()">
+	<h1>Add New Employee</h1>
+	<form name="addEmployeeForm" ng-submit="addEmployeeForm.$valid && addEmployeeCtrl.addEmployee()" novalidate>
+		<fieldset class="form-group">
+			<label>First Name</label>
+			<input type="text" class="form-control" ng-model="addEmployeeCtrl.employee.firstname" required>
+		</fieldset>
+		<fieldset class="form-group">
+			<label>Last Name</label>
+			<input type="text" class="form-control" ng-model="addEmployeeCtrl.employee.lastname" required>
+		</fieldset>
+		<fieldset class="form-group">
+			<label>Salary</label>
+			<input type="number" class="form-control" ng-model="addEmployeeCtrl.employee.salary" min=100>
+		</fieldset>
+		<fieldset class="form-group">
+			<label>Position</label>
+			<input type="text" class="form-control" ng-model="addEmployeeCtrl.employee.position">
+		</fieldset>
+		<fieldset class="form-group">
+			<label>Started</label>
+			<input type="date" class="form-control" ng-model="addEmployeeCtrl.employee.started">
+		</fieldset>
+		<fieldset class="form-group">
+			<select class="form-control" ng-model="addEmployeeCtrl.employee.sex">
+				<label>Sex</label>
+				<option value="MALE">Male</option>
+				<option value="FEMALE">Female</option>
+			</select>
+		</fieldset>
+		<input type="submit" class="btn btn-primary" value="Add Employee" />
+		<input type="submit" class="btn" ng-click="addEmployeeCtrl.cancel()" value="Cancel" />
+	</form>
+</section>
+

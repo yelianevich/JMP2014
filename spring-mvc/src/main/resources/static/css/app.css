@@ -1,0 +1,12 @@
+.ng-invalid.ng-dirty {
+	border-color: red;
+}
+
+.ng-valid.ng-dirty {
+	border-color: green
+}
+
+body{
+	max-width: 80%;
+	margin: 20px auto;
+}

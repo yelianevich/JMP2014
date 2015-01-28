@@ -8,7 +8,14 @@
 	<packaging>jar</packaging>
 
 	<name>jmp</name>
-	<url>http://maven.apache.org</url>
+	<description>
+		This project includes the following topics:
+			1) Classloading
+			2) Unit testing
+			3) Memory Management (GC, References, JMC)
+			4) Concurrency
+			5) Hypersonic DB
+	</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
