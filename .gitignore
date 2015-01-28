@@ -11,6 +11,10 @@ build/
 .classpath
 .settings
 
+# IDEA
+.idea
+*.iml
+
 # Logs
 
 *.log
