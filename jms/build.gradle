@@ -1,0 +1,32 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+version = '1.2.1'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
+    }
+}
+
+
+repositories {
+	jcenter()
+}
+
+dependencies {
+	compile(group: 'com.rabbitmq', name: 'amqp-client', version: '3.4.3')
+	compile(group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.1')
+	compile(group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.1')
+	testCompile(group: 'junit', name: 'junit', version: '4.12')
+}
+
+task fatJar(type: Jar) {
+	baseName = project.name + version
+	// manifest { attributes 'Main-Class': 'com.epam.rabbitmq.workqueue.Worker' }
+	// can specify class with main() method, e.g. > java -cp jms-1.2.1.jar com.epam.rabbitmq.workqueue.Worker
+	from {
+		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+	} with jar
+}
