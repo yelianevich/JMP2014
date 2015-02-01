@@ -2,6 +2,8 @@ package com.epam.rabbitmq.helloworld;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.core.util.Charsets;
+
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -18,7 +20,7 @@ public class Send {
 
 		channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 		String message = "Hello World!";
-		channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+		channel.basicPublish("", QUEUE_NAME, null, message.getBytes(Charsets.UTF_8));
 		System.out.println(" [x] Sent '" + message + "'");
 
 		channel.close();

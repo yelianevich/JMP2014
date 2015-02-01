@@ -1,12 +1,20 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
 
 sourceCompatibility = 1.8
 version = '1.2.1'
 
 checkstyle {
 	sourceSets = [ project.sourceSets.main, project.sourceSets.test ]
+}
+
+tasks.withType(FindBugs) {
+	reports {
+		xml.enabled = false
+		html.enabled = true
+	}
 }
 
 jar {
