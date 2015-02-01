@@ -1,15 +1,19 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'checkstyle'
 
 sourceCompatibility = 1.8
 version = '1.2.1'
 
-jar {
-    manifest {
-        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
-    }
+checkstyle {
+	sourceSets = [ project.sourceSets.main, project.sourceSets.test ]
 }
 
+jar {
+	manifest {
+		attributes 'Implementation-Title': 'jms', 'Implementation-Version': version
+	}
+}
 
 repositories {
 	jcenter()

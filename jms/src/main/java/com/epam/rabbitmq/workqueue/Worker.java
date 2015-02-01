@@ -45,8 +45,9 @@ public class Worker {
 
 	private static void doWork(String task) throws InterruptedException {
 		for (char ch : task.toCharArray()) {
-			if (ch == '.')
+			if (ch == '.') {
 				Thread.sleep(1000);
+			}
 		}
 	}
 
