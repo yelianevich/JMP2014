@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
+apply plugin: "jacoco"
 
 sourceCompatibility = 1.8
 version = '1.2.1'
@@ -15,6 +16,14 @@ tasks.withType(FindBugs) {
 		xml.enabled = false
 		html.enabled = true
 	}
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = false
+        csv.enabled = false
+        html.enabled = true
+    }
 }
 
 jar {
