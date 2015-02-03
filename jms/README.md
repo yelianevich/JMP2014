@@ -40,3 +40,18 @@ java -cp jms-1.2.1.jar com.epam.rabbitmq.helloworld.NewTask
 ```
 
 Using sender console send custom messages to the workers. Dots in the end of the message mean pause.
+
+## Code Quality Check
+
+Checkstyle and FindBugs are triggered when `gradle build` is launched. All checks could be run as `gradle check`.
+
+To run them separately see the list below.
+
+* Checkstyle
+  * `gradle checkstyleMain` - to check style of application sources
+  * `gradle checkstyleTest` - to check style of tests sources
+* FindBugs
+  * `gradle findbugsMain` - find bugs in application sources
+  * `gradle findbugsTest` - find bugs in tests sources
+* JoCoCo - generate test coverage reports
+  * `gradle jococoTestReport` - generate HTML file with test coverage results
