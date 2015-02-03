@@ -2,6 +2,8 @@ package com.epam.rabbitmq.helloworld;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.core.util.Charsets;
+
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -27,7 +29,7 @@ public class Receive {
 
 		while (true) {
 			QueueingConsumer.Delivery delivery = consumer.nextDelivery();
-			String message = new String(delivery.getBody());
+			String message = new String(delivery.getBody(), Charsets.UTF_8);
 			System.out.println(" [x] Received '" + message + "'");
 		}
 	}

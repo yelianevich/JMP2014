@@ -1,15 +1,36 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: "jacoco"
 
 sourceCompatibility = 1.8
 version = '1.2.1'
 
-jar {
-    manifest {
-        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
+checkstyle {
+	sourceSets = [ project.sourceSets.main, project.sourceSets.test ]
+}
+
+tasks.withType(FindBugs) {
+	reports {
+		xml.enabled = false
+		html.enabled = true
+	}
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = false
+        csv.enabled = false
+        html.enabled = true
     }
 }
 
+jar {
+	manifest {
+		attributes 'Implementation-Title': 'jms', 'Implementation-Version': version
+	}
+}
 
 repositories {
 	jcenter()
