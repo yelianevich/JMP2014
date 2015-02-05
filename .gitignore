@@ -10,6 +10,7 @@ build/
 
 .classpath
 .settings
+.project
 
 # IDEA
 .idea
