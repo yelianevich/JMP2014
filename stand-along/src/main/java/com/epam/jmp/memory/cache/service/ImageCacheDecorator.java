@@ -16,10 +16,9 @@ public class ImageCacheDecorator implements ImageProvider {
 	private ImageProvider imageProvider;
 
 	private Map<String, Reference<Image>> cache = new HashMap<>();
-	private Class<? extends Reference<Image>> refType;
+	private Class<?> refType;
 
-	public ImageCacheDecorator(Class<? extends Reference<Image>> refType,
-			ImageProvider imageProvider) {
+	public ImageCacheDecorator(Class<?> refType, ImageProvider imageProvider) {
 		this.imageProvider = imageProvider;
 		this.refType = refType;
 	}
@@ -54,14 +53,12 @@ public class ImageCacheDecorator implements ImageProvider {
 		Reference<Image> cacheRef = null;
 		try {
 			@SuppressWarnings("unchecked")
-			Constructor<Reference<Image>> constr = (Constructor<Reference<Image>>) refType
-					.getConstructor(Object.class);
+			Constructor<Reference<Image>> constr = (Constructor<Reference<Image>>) refType.getConstructor(Object.class);
 			cacheRef = constr.newInstance(image);
-		} catch (NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
 			LOG.error(e);
-			throw new IllegalArgumentException(
-					"Reference subclass Class passed to the constructor is wrong");
+			throw new IllegalArgumentException("Reference subclass Class passed to the constructor is wrong");
 		}
 
 		return cacheRef;

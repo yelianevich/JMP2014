@@ -27,10 +27,7 @@ public class ImageSoftDecoratorTest {
 	@Before
 	public void setUp() {
 		given(realProvider.loadImage(IMG_GOSLING)).willReturn(sampleImage);
-
-		@SuppressWarnings("unchecked")
-		Class<? extends SoftReference<Image>> refType = (Class<? extends SoftReference<Image>>) SoftReference.class;
-		imageCacheProvider = new ImageCacheDecorator(refType, realProvider);
+		imageCacheProvider = new ImageCacheDecorator(SoftReference.class, realProvider);
 	}
 
 	@Test

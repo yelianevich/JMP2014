@@ -9,8 +9,6 @@ import java.util.jar.JarFile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.sun.org.apache.bcel.internal.classfile.ClassFormatException;
-
 public class ModuleLoader extends ClassLoader {
 	private static final Logger LOG = LogManager.getLogger(ModuleLoader.class
 			.getName());
@@ -30,7 +28,7 @@ public class ModuleLoader extends ClassLoader {
 			String pathToClass = name.replace('.', '/') + ".class";
 			byte[] clazzBytes = fetchFromJar(pathToClass);
 			return defineClass(name, clazzBytes, 0, clazzBytes.length);
-		} catch (ClassFormatException e) {
+		} catch (ClassFormatError e) {
 			LOG.error("Class is corrupted", e);
 		}
 		return null;

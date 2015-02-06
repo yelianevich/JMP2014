@@ -19,5 +19,5 @@ To run Spring Boot application execute gradle command:
 gradle bootRun
 ```
 
-Go to `http://localhost:8080` in your browser and have fun!
+Go to `http://localhost:9120` in your browser and have fun! (port could be changed in application.properties)
 

@@ -1,6 +1,5 @@
 package com.epam.jmp.memory.cache;
 
-import java.awt.Image;
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
@@ -30,9 +29,7 @@ public final class ImageCacheDemo {
 		String pozner = "https://upload.wikimedia.org/wikipedia/commons/f/f2/Vladimir_Posner_2013_04.jpg"; // 5.4 MB
 		String brattPit = "http://www.hdwallpapers.in/walls/brad_pitt_in_fury-wide.jpg"; // 1.1 MB
 
-		@SuppressWarnings("unchecked")
-		Class<? extends SoftReference<Image>> refType = (Class<? extends SoftReference<Image>>) SoftReference.class;
-		ImageProvider imageProvider = new ImageCacheDecorator(refType, new WebImageProvider());
+		ImageProvider imageProvider = new ImageCacheDecorator(SoftReference.class, new WebImageProvider());
 
 		imageProvider.loadImage(catchingFire);
 		imageProvider.loadImage(lucy);
@@ -54,9 +51,7 @@ public final class ImageCacheDemo {
 		LOG.info("Start soft image cache demo");
 		Thread.sleep(1000);
 
-		@SuppressWarnings("unchecked")
-		Class<? extends WeakReference<Image>> weakRefType = (Class<? extends WeakReference<Image>>) WeakReference.class;
-		imageProvider = new ImageCacheDecorator(weakRefType, new WebImageProvider());
+		imageProvider = new ImageCacheDecorator(WeakReference.class, new WebImageProvider());
 
 		imageProvider.loadImage(street);
 		imageProvider.loadImage(pozner);

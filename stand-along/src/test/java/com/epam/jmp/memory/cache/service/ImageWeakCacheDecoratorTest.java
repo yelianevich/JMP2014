@@ -27,10 +27,7 @@ public class ImageWeakCacheDecoratorTest {
 	@Before
 	public void setUp() {
 		given(realProvider.loadImage(IMG_GOSLING)).willReturn(sampleImage);
-
-		@SuppressWarnings("unchecked")
-		Class<? extends WeakReference<Image>> refType = (Class<? extends WeakReference<Image>>) WeakReference.class;
-		imageCacheProvider = new ImageCacheDecorator(refType, realProvider);
+		imageCacheProvider = new ImageCacheDecorator(WeakReference.class, realProvider);
 	}
 
 	@Test

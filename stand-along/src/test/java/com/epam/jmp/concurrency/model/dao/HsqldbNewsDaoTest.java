@@ -14,10 +14,12 @@ import java.io.FileInputStream;
 import org.dbunit.DBTestCase;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.epam.jmp.util.Config;
 
+@Ignore
 public class HsqldbNewsDaoTest extends DBTestCase {
 
 	public HsqldbNewsDaoTest(String name) {
