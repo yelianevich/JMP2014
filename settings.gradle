@@ -1,0 +1,3 @@
+rootProject.name = 'jmp'
+
+include "jms", "spring-mvc", "stand-along"
