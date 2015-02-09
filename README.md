@@ -13,3 +13,4 @@ Task are related to various aspects of JVM, Java SE and Java EE.
 * [Spring MVC](https://github.com/yelianevich/JMP2014/tree/master/spring-mvc)
 * [JMS](https://github.com/yelianevich/JMP2014/tree/master/jms)
 * [Code Quality and Review (see build.grade)](https://github.com/yelianevich/JMP2014/tree/master/jms)
+* [Enterprise Design Patterns](https://github.com/yelianevich/JMP2014/tree/master/enterprise-design-patterns)
