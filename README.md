@@ -14,3 +14,8 @@ Task are related to various aspects of JVM, Java SE and Java EE.
 * [JMS](https://github.com/yelianevich/JMP2014/tree/master/jms)
 * [Code Quality and Review (see build.grade)](https://github.com/yelianevich/JMP2014/tree/master/jms)
 * [Enterprise Design Patterns](https://github.com/yelianevich/JMP2014/tree/master/enterprise-design-patterns)
+
+# Build Projects
+
+* Install latest Java 8 release and define JAVA_HOME environment variable to installation folder
+* Run gradlew.bat (Windows) or gradlew (*nix) depending on OS

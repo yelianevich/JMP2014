@@ -24,3 +24,7 @@ subprojects {
 		manifest.attributes provider: 'gradle'
 	}
 }
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.2.1'
+}
