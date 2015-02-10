@@ -3,7 +3,7 @@
 Repository contains implementations for various tasks that were assigned during Java mentoring program in Minsk.
 Task are related to various aspects of JVM, Java SE and Java EE.
 
-# Themes
+## Themes
 
 * [Classloading](https://github.com/yelianevich/JMP2014/tree/master/stand-along/src/main/java/com/epam/jmp/classloading)
 * [Garbage Collection in Java](https://github.com/yelianevich/JMP2014/tree/master/stand-along/src/main/java/com/epam/jmp/gc)
@@ -15,7 +15,8 @@ Task are related to various aspects of JVM, Java SE and Java EE.
 * [Code Quality and Review (see build.grade)](https://github.com/yelianevich/JMP2014/tree/master/jms)
 * [Enterprise Design Patterns](https://github.com/yelianevich/JMP2014/tree/master/enterprise-design-patterns)
 
-# Build Projects
+## How to Build Projects
 
-* Install latest Java 8 release and define JAVA_HOME environment variable to installation folder
-* Run gradlew.bat (Windows) or gradlew (*nix) depending on OS
+There are only two required steps to build JMP project:
+* Install latest Java 8 release and define `JAVA_HOME` environment variable to installation folder
+* Run `gradlew.bat build` (Windows) or `gradlew build` (*nix) depending on OS
