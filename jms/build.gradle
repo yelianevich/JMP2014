@@ -28,7 +28,7 @@ jar {
 }
 
 dependencies {
-	compile(group: 'com.rabbitmq', name: 'amqp-client', version: '3.4.3')
+	compile("com.rabbitmq:amqp-client:$rabbitMqVersion")
 }
 
 task fatJar(type: Jar) {

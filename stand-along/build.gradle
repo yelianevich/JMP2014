@@ -4,23 +4,13 @@ jar {
 	}
 }
 
-ext.springVersion = '4.1.1.RELEASE'
 dependencies {
 	compile "org.springframework:spring-core:$springVersion"
 	compile "org.springframework:spring-context:$springVersion"
 	compile "org.springframework:spring-jdbc:$springVersion"
 	compile "org.springframework:spring-beans:$springVersion"
-
-	compile 'org.hsqldb:hsqldb:2.3.2'
-
-	compile 'com.google.guava:guava:18.0'
-	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.4.0'
-
-	testCompile('junit:junit:4.12') {
-		exclude group: 'org.hamcrest', module: 'hamcrest-core'
-	}
-	testCompile 'org.hamcrest:hamcrest-all:1.3'
-	testCompile 'org.mockito:mockito-core:1.10.8'
-	compile 'org.dbunit:dbunit:2.5.0'
+	compile "org.hsqldb:hsqldb:$hsqldbVersion"
+	compile "com.google.guava:guava:$guavaVersion"
+	compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion"
+	compile "org.dbunit:dbunit:$dbunitVersion"
 }
-
