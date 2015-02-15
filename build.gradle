@@ -14,6 +14,9 @@ allprojects {
 		log4jVersion = '2.1'
 		rabbitMqVersion = '3.4.3'
 		jacksonVersion = '2.4.0'
+		jbehaveVersion = '3.9.5'
+		slf4jVersion = '1.7.9'
+		slf4jLog4j12Version = '1.7.10'
 	}
 
 	apply plugin: 'java'
@@ -53,5 +56,5 @@ allprojects {
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '2.2.1'
+	gradleVersion = '2.3-rc-4'
 }
