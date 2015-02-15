@@ -10,11 +10,8 @@ import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.InstanceStepsFactory;
 import org.jbehave.core.steps.ParameterConverters;
 import org.jbehave.core.steps.ParameterConverters.DateConverter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class BerlinClock extends JUnitStory {
-	private static final Logger LOG = LoggerFactory.getLogger(BerlinClock.class);
 
 	@Override
 	public InjectableStepsFactory stepsFactory() {
