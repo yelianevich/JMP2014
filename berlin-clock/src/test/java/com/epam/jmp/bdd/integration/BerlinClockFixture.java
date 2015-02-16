@@ -9,6 +9,8 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 
 import com.epam.jmp.bdd.BerlinClockTimeConvertor;
+import com.epam.jmp.bdd.IsoTimeParser;
+import com.epam.jmp.bdd.TextBerlinClockBuilder;
 import com.epam.jmp.bdd.TimeConverter;
 
 /**
@@ -19,9 +21,12 @@ public class BerlinClockFixture {
 	private TimeConverter berlinClock;
 	private String theTime;
 
-	@Given("time converter")
+	@Given("new time converter")
 	public void converterAvailable() {
-		berlinClock = new BerlinClockTimeConvertor();
+		BerlinClockTimeConvertor convertor = new BerlinClockTimeConvertor();
+		convertor.setClockBuilder(new TextBerlinClockBuilder());
+		convertor.setTimeParser(new IsoTimeParser());
+		berlinClock = convertor;
 	}
 	
 	@When("the time is $time")

@@ -9,7 +9,7 @@ Narrative:
 	So that I can increase then number of ways that I can read the time
 
 Scenario: Midnight
-Given time converter
+Given new time converter
 When the time is 00:00:00
 Then the clock should look like
 Y
@@ -19,6 +19,7 @@ OOOOOOOOOOO
 OOOO
 
 Scenario: Just before midnight
+Given new time converter
 When the time is 23:59:59
 Then the clock should look like
 O
@@ -28,6 +29,7 @@ YYRYYRYYRYY
 YYYY
 
 Scenario: Just After midnight
+Given new time converter
 When the time is 00:00:01
 Then the clock should look like
 O
@@ -37,6 +39,7 @@ OOOOOOOOOOO
 OOOO
 
 Scenario: Middle of the afternoon
+Given new time converter
 When the time is 13:17:01
 Then the clock should look like
 O

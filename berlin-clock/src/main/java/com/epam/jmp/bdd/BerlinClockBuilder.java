@@ -4,7 +4,7 @@ public interface BerlinClockBuilder<T> {
 
 	T clock();
 
-	BerlinClockBuilder<T> second(int i);
+	BerlinClockBuilder<T> second(int seconds);
 
 	BerlinClockBuilder<String> hour(int hours);
 

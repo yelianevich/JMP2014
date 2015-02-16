@@ -64,8 +64,8 @@ public class TextBerlinClockBuilder implements BerlinClockBuilder<String> {
 	}
 
 	@Override
-	public BerlinClockBuilder<String> second(int i) {
-		boolean isSecondTick = i % 2 == 0;
+	public BerlinClockBuilder<String> second(int second) {
+		boolean isSecondTick = second % 2 == 0;
 		secondsLamp[0] = isSecondTick ? YELLOW : OFF;
 		return this;
 	}
