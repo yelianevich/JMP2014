@@ -1,5 +1,1 @@
-jar {
-	manifest {
-		attributes 'Implementation-Title': 'Java Enterprise Patterns', 'Implementation-Version': version
-	}
-}
+jar.manifest.attributes 'Implementation-Title': 'Java Enterprise Patterns'

@@ -1,8 +1,4 @@
-jar {
-	manifest {
-		attributes 'Implementation-Title': 'jmp', 'Implementation-Version': version
-	}
-}
+jar.manifest.attributes 'Implementation-Title': 'jmp'
 
 dependencies {
 	compile "org.springframework:spring-core:$springVersion"

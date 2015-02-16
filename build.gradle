@@ -1,6 +1,17 @@
 allprojects {
+	apply plugin: 'eclipse'
+
 	group = "com.epam.jmp"
 	version = '0.1-SNAPSHOT'
+
+	task wrapper(type: Wrapper) {
+		description = 'Generate generic scripts to run on *nix and Windows'
+		gradleVersion = '2.3-rc-4'
+	}
+}
+
+subprojects {
+	apply plugin: 'java'
 
 	ext {
 		bootVersion = '1.2.0.RELEASE'
@@ -19,9 +30,6 @@ allprojects {
 		slf4jLog4j12Version = '1.7.10'
 	}
 
-	apply plugin: 'java'
-	apply plugin: 'eclipse'
-
 	compileJava {
 		sourceCompatibility = 1.8
 		targetCompatibility = 1.8
@@ -30,16 +38,13 @@ allprojects {
 	compileTestJava {
 		sourceCompatibility = 1.8
 		targetCompatibility = 1.8
-		options.compilerArgs += "-parameters"
 	}
 
 	repositories {
-		mavenLocal()
 		jcenter()
 	}
 
 	dependencies {
-		compile "org.apache.logging.log4j:log4j-api:$log4jVersion"
 		compile "org.apache.logging.log4j:log4j-core:$log4jVersion"
 		testCompile("junit:junit:$junitVersion") {
 			exclude group: 'org.hamcrest', module: 'hamcrest-core'
@@ -51,11 +56,8 @@ allprojects {
 	}
 
 	jar {
-		manifest.attributes provider: 'gradle'
-	}
-
-	task wrapper(type: Wrapper) {
-		description = 'Generate generic scripts to run on *nix and Windows'
-		gradleVersion = '2.3-rc-4'
+		manifest {
+			attributes provider: 'gradle', 'Implementation-Version': version
+		}
 	}
 }

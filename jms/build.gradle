@@ -21,21 +21,31 @@ jacocoTestReport {
 	}
 }
 
-jar {
-	manifest {
-		attributes 'Implementation-Title': 'jms', 'Implementation-Version': version
-	}
-}
+jar.manifest.attributes 'Implementation-Title': 'jms'
 
 dependencies {
 	compile("com.rabbitmq:amqp-client:$rabbitMqVersion")
 }
 
-task fatJar(type: Jar) {
-	baseName = project.name + version
-	// manifest { attributes 'Main-Class': 'com.epam.rabbitmq.workqueue.Worker' }
-	// can specify class with main() method, e.g. > java -cp jms-1.2.1.jar com.epam.rabbitmq.workqueue.Worker
+task workerJar(type: Jar) {
+	description = 'Assemble worker runnable jar'
+	baseName = 'jms-worker'
+	manifest.attributes 'Main-Class': 'com.epam.rabbitmq.workqueue.Worker'
+	exclude 'com/epam/rabbitmq/helloworld/**'
 	from {
 		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 	} with jar
 }
+
+task producerJar(type: Jar) {
+	description = 'Assemble producer runnable jar'
+	baseName = 'jms-producer'
+	manifest.attributes 'Main-Class': 'com.epam.rabbitmq.workqueue.NewTask'
+	exclude 'com/epam/rabbitmq/helloworld/**'
+	from {
+		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+	} with jar
+}
+
+jar.dependsOn(producerJar, workerJar)
+
