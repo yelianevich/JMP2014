@@ -1,3 +1,8 @@
 rootProject.name = 'jmp'
 
-include "jms", "spring-mvc", "stand-along", "enterprise-design-patterns", "berlin-clock"
+include "jmp-jms", "jmp-spring-mvc", "jmp-java-core", "jmp-enterprise-design-patterns", "jmp-berlin-clock"
+
+// set custom build files names for each subproject
+rootProject.children.each {
+	it.buildFileName = it.name + '.gradle' - 'jmp-'
+}

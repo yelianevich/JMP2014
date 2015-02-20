@@ -8,9 +8,9 @@ build/
 
 # Eclipse Project Files #
 
-.classpath
-.settings
-.project
+*.classpath
+*.settings
+*.project
 
 # IDEA
 .idea
