@@ -60,4 +60,8 @@ subprojects {
 			attributes provider: 'gradle', 'Implementation-Version': version
 		}
 	}
+
+	test {
+		exclude '**/*Suite.class', '**/*Tests.class'
+	}
 }
