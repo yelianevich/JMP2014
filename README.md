@@ -5,16 +5,16 @@ Task are related to various aspects of JVM, Java SE and Java EE.
 
 ## Themes
 
-* [Classloading](https://github.com/yelianevich/JMP2014/tree/master/stand-along/src/main/java/com/epam/jmp/classloading)
-* [Garbage Collection in Java](https://github.com/yelianevich/JMP2014/tree/master/stand-along/src/main/java/com/epam/jmp/gc)
-* [Memory Management](https://github.com/yelianevich/JMP2014/tree/master/stand-along/src/main/java/com/epam/jmp/memory)
-* [Classic Model and Concurrency](https://github.com/yelianevich/JMP2014/tree/master/stand-along/src/main/java/com/epam/jmp/concurrency)
-* [Unit Testing](https://github.com/yelianevich/JMP2014/tree/master/stand-along/src/test/java/com/epam/jmp)
-* [Spring MVC](https://github.com/yelianevich/JMP2014/tree/master/spring-mvc)
-* [JMS](https://github.com/yelianevich/JMP2014/tree/master/jms)
-* [Code Quality and Review (see build.grade)](https://github.com/yelianevich/JMP2014/tree/master/jms)
-* [Enterprise Design Patterns](https://github.com/yelianevich/JMP2014/tree/master/enterprise-design-patterns)
-* [Software Design Principles: EDD, DDD, DbDD, BDD](https://github.com/yelianevich/JMP2014/tree/master/berlin-clock)
+* [Classloading](https://github.com/yelianevich/JMP2014/tree/master/jmp-java-core/src/main/java/com/epam/jmp/classloading)
+* [Garbage Collection in Java](https://github.com/yelianevich/JMP2014/tree/master/jmp-java-core/src/main/java/com/epam/jmp/gc)
+* [Memory Management](https://github.com/yelianevich/JMP2014/tree/master/jmp-java-core/src/main/java/com/epam/jmp/memory)
+* [Classic Model and Concurrency](https://github.com/yelianevich/JMP2014/tree/master/jmp-java-core/src/main/java/com/epam/jmp/concurrency)
+* [Unit Testing](https://github.com/yelianevich/JMP2014/tree/master/jmp-java-core/src/test/java/com/epam/jmp)
+* [Spring MVC](https://github.com/yelianevich/JMP2014/tree/master/jmp-spring-mvc)
+* [JMS](https://github.com/yelianevich/JMP2014/tree/master/jmp-jms)
+* [Code Quality and Review (see build.grade)](https://github.com/yelianevich/JMP2014/tree/master/jmp-jms)
+* [Enterprise Design Patterns](https://github.com/yelianevich/JMP2014/tree/master/jmp-enterprise-design-patterns)
+* [Software Design Principles: EDD, DDD, DbDD, BDD](https://github.com/yelianevich/JMP2014/tree/master/jmp-berlin-clock)
 
 ## How to Build Projects
 
