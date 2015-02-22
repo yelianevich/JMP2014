@@ -63,5 +63,16 @@ subprojects {
 
 	test {
 		exclude '**/*Suite.class', '**/*Tests.class'
+
+		//forkEvery = 5
+		//maxParallelForks = Runtime.runtime.availableProcessors() / 2
+
+		testLogging {
+			showStackTraces = true
+			exceptionFormat 'full'
+			events 'skipped', 'failed'
+		}
 	}
+
+	test.addTestListener(new com.epam.jmp.NotificationTestListener(project))
 }
