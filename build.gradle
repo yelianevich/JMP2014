@@ -1,4 +1,5 @@
 allprojects {
+	defaultTasks 'build'
 	apply plugin: 'eclipse'
 
 	group = "com.epam.jmp"
