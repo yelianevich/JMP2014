@@ -16,7 +16,7 @@ Client side was implemented using Angular JS framework that consume descibed abo
 To run Spring Boot application execute gradle command:
 
 ```gradle
-gradle bootRun
+gradlew bootRun
 ```
 
 Go to `http://localhost:9120` in your browser and have fun! (port could be changed in application.properties)
