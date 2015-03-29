@@ -4,11 +4,6 @@ allprojects {
 
 	group = "com.epam.jmp"
 	version = '0.1-SNAPSHOT'
-
-	task wrapper(type: Wrapper) {
-		description = 'Generate generic scripts to run on *nix and Windows'
-		gradleVersion = '2.3'
-	}
 }
 
 subprojects {
@@ -76,4 +71,9 @@ subprojects {
 	}
 
 	test.addTestListener(new com.epam.jmp.NotificationTestListener(project))
+}
+
+task wrapper(type: Wrapper) {
+	description = 'Generate generic scripts to run on *nix and Windows'
+	gradleVersion = '2.3'
 }
