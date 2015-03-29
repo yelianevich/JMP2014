@@ -8,6 +8,9 @@ allprojects {
 
 subprojects {
 	apply plugin: 'java'
+	apply from: "$rootDir/gradle/checkstyle.gradle"
+	apply from: "$rootDir/gradle/findbugs.gradle"
+	apply from: "$rootDir/gradle/jacoco.gradle"
 
 	ext {
 		bootVersion = '1.2.0.RELEASE'

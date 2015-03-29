@@ -1,0 +1,8 @@
+apply plugin: 'checkstyle'
+
+checkstyle {
+	sourceSets = [ project.sourceSets.main, project.sourceSets.test ]
+	configFile = file("$rootDir/config/checkstyle/checkstyle.xml")
+	ignoreFailures = true
+	showViolations = false
+}
