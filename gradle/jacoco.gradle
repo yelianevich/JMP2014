@@ -7,7 +7,7 @@ jacoco {
 
 jacocoTestReport {
 	group = "Reporting"
-	description = "Generate JaCoСo reports after running tests."
+	description = "Generate JaCoCo reports after running tests."
 	reports {
 		xml.enabled = false
 		csv.enabled = false

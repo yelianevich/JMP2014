@@ -1,9 +1,23 @@
+apply plugin: 'sonar-runner'
+
+sonarRunner {
+	sonarProperties {
+		property 'sonar.projectName', 'jmp'
+		property 'sonar.projectDescription', 'Java mentoring program training tasks'
+		property "sonar.java.coveragePlugin", "jacoco"
+	}
+}
+
 allprojects {
 	defaultTasks 'build'
 	apply plugin: 'eclipse'
 
 	group = "com.epam.jmp"
 	version = '0.1-SNAPSHOT'
+
+	repositories {
+		jcenter()
+	}
 }
 
 subprojects {
@@ -39,10 +53,6 @@ subprojects {
 		targetCompatibility = 1.8
 	}
 
-	repositories {
-		jcenter()
-	}
-
 	dependencies {
 		compile "org.apache.logging.log4j:log4j-core:$log4jVersion"
 		testCompile("junit:junit:$junitVersion") {
@@ -72,8 +82,13 @@ subprojects {
 			events 'skipped', 'failed'
 		}
 	}
-
 	test.addTestListener(new com.epam.jmp.NotificationTestListener(project))
+
+	sonarRunner {
+		sonarProperties {
+			property 'sonar.sourceEncoding', 'UTF-8'
+		}
+	}
 }
 
 task wrapper(type: Wrapper) {
