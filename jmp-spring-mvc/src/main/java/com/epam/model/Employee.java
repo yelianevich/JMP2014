@@ -113,42 +113,57 @@ public class Employee {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Employee other = (Employee) obj;
 		if (firstname == null) {
-			if (other.firstname != null)
+			if (other.firstname != null) {
 				return false;
-		} else if (!firstname.equals(other.firstname))
+			}
+		} else if (!firstname.equals(other.firstname)) {
 			return false;
-		if (id != other.id)
+		}
+		if (id != other.id) {
 			return false;
+		}
 		if (lastname == null) {
-			if (other.lastname != null)
+			if (other.lastname != null) {
 				return false;
-		} else if (!lastname.equals(other.lastname))
+			}
+		} else if (!lastname.equals(other.lastname)) {
 			return false;
+		}
 		if (position == null) {
-			if (other.position != null)
+			if (other.position != null) {
 				return false;
-		} else if (!position.equals(other.position))
+			}
+		} else if (!position.equals(other.position)) {
 			return false;
+		}
 		if (salary == null) {
-			if (other.salary != null)
+			if (other.salary != null) {
 				return false;
-		} else if (!salary.equals(other.salary))
+			}
+		} else if (!salary.equals(other.salary)) {
 			return false;
-		if (sex != other.sex)
+		}
+		if (sex != other.sex) {
 			return false;
+		}
 		if (started == null) {
-			if (other.started != null)
+			if (other.started != null) {
 				return false;
-		} else if (!started.equals(other.started))
+			}
+		} else if (!started.equals(other.started)) {
 			return false;
+		}
 		return true;
 	}
 

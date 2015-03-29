@@ -7,7 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class MemoryEater {
-	static final Logger logger = LogManager.getLogger(MemoryEater.class);
+	static final Logger LOG = LogManager.getLogger(MemoryEater.class);
 
 	public static void main(String[] args) {
 		List<byte[]> v = new ArrayList<>();

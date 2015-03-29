@@ -1,7 +1,5 @@
 package com.epam.jmp.gc;
 
-import com.epam.jmp.gc.MyClassLoader;
-
 public class PermGenTest {
 	public static void main(String[] args) throws Exception {
 		Class<?> clazz = PermGenTest.class;
