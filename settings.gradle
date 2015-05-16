@@ -1,6 +1,6 @@
 rootProject.name = 'jmp'
 
-include "jmp-jms", "jmp-spring-mvc", "jmp-java-core", "jmp-enterprise-design-patterns", "jmp-berlin-clock"
+include "jmp-jms", "jmp-spring-mvc", "jmp-java-core", "jmp-enterprise-design-patterns", "jmp-berlin-clock", "jmp-java8"
 
 // set custom build files names for each subproject
 rootProject.children.each {
