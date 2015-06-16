@@ -6,8 +6,8 @@ public interface BerlinClockBuilder<T> {
 
 	BerlinClockBuilder<T> second(int seconds);
 
-	BerlinClockBuilder<String> hour(int hours);
+	BerlinClockBuilder<T> hour(int hours);
 
-	BerlinClockBuilder<String> minute(int mins);
+	BerlinClockBuilder<T> minute(int mins);
 
 }
