@@ -9,4 +9,5 @@ dependencies {
 	compile "com.google.guava:guava:$guavaVersion"
 	compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion"
 	compile "org.dbunit:dbunit:$dbunitVersion"
+	compile "org.apache.commons:commons-lang3:$commonsLang3Version"
 }

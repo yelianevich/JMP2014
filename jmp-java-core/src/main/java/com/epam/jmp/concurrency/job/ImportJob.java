@@ -3,6 +3,7 @@ package com.epam.jmp.concurrency.job;
 import static com.epam.jmp.util.Config.ERROR_FOLDER;
 import static com.epam.jmp.util.Config.READ_TIMEOUT;
 import static com.epam.jmp.util.Config.THREADS_COUNT;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,8 +36,14 @@ public class ImportJob implements Runnable {
 			t.setDaemon(true);
 			return t;
 		});
-		int threadsCount = Integer.parseInt(Config.INST.prop(THREADS_COUNT));
-		this.executor = Executors.newFixedThreadPool(threadsCount);
+		this.executor = Executors.newFixedThreadPool(getThreadCount());
+	}
+
+	private int getThreadCount() {
+		String threadCountStr = Config.INST.prop(THREADS_COUNT);
+		return isBlank(threadCountStr)
+				? Runtime.getRuntime().availableProcessors()
+				: Integer.parseInt(threadCountStr);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.epam.jmp.util;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -42,9 +43,11 @@ public class ConfigTest {
 	}
 
 	@Test
-	public void shouldReturnPositiveThreadCount() throws Exception {
+	public void shouldReturnPositiveThreadCountOrBlank() throws Exception {
 		String threadCountStr = Config.INST.prop(Config.THREADS_COUNT);
-		int threadCount = Integer.parseInt(threadCountStr, 10);
+		int threadCount = isNotBlank(threadCountStr)
+				? Integer.parseInt(threadCountStr)
+				: 4;
 		assertThat(threadCount, greaterThan(0));
 	}
 

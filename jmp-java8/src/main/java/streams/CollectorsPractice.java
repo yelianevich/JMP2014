@@ -20,7 +20,7 @@ public final class CollectorsPractice {
 
 		traders.collect(new ToListCollector<>()).forEach(System.out::println);;
 		// or (doesn't work for some reason with ArrayList::new)
-		traders.collect(() -> new ArrayList<>(), List::add, List::addAll);
+		traders.collect(ArrayList::new, List::add, List::addAll);
 
 		// using takeWhile = LongSummaryStatistics{count=100, sum=2807, min=24, average=28.070000, max=107}
 		// using filter = LongSummaryStatistics{count=100, sum=33640, min=305, average=336.400000, max=415}
