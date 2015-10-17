@@ -93,5 +93,5 @@ subprojects {
 
 task wrapper(type: Wrapper) {
 	description = 'Generate generic scripts to run on *nix and Windows'
-	gradleVersion = '2.3'
+	gradleVersion = '2.7'
 }
