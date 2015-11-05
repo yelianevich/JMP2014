@@ -1,7 +1,7 @@
-package com.epam.jmp.concurrency.model.service;
+package com.epam.jmp.concurrency.service;
 
+import com.epam.jmp.concurrency.dao.NewsDao;
 import com.epam.jmp.concurrency.model.News;
-import com.epam.jmp.concurrency.model.dao.NewsDao;
 
 public interface NewsService {
 

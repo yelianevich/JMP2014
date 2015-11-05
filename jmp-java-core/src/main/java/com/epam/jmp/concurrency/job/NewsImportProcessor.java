@@ -10,10 +10,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.epam.jmp.concurrency.model.News;
-import com.epam.jmp.concurrency.model.service.LocalNewsService;
-import com.epam.jmp.concurrency.model.service.NewsService;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.epam.jmp.concurrency.service.LocalNewsService;
+import com.epam.jmp.concurrency.service.NewsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
@@ -39,17 +37,16 @@ public class NewsImportProcessor implements Callable<Boolean> {
 		try {
 			List<String> lines = Files.readAllLines(file);
 			StringBuilder builder = new StringBuilder();
-			lines.forEach(str -> builder.append(str));
+			lines.forEach(builder::append);
 			News news = mapper.readValue(builder.toString(), News.class);
 			newsService.upsertNews(news);
 			Files.delete(file);
 			imported = true;
-		} catch (JsonMappingException | JsonParseException e) {
+		} catch (IOException e) {
+			LOG.error("Import failed for " + file, e);
 			moved = Cleaner.handleImportError(e, file, errorDir);
-		}
-		catch (IOException e) {
-			LOG.error("Import failed", e);
-			throw new RuntimeException(e);
+		} catch (Throwable e) {
+			LOG.error("Failed to import [{}], exception: {}", file.getFileName(), e);
 		}
 		return imported;
 	}
@@ -58,16 +55,8 @@ public class NewsImportProcessor implements Callable<Boolean> {
 		return moved;
 	}
 
-	public void setMoved(boolean moved) {
-		this.moved = moved;
-	}
-
 	public boolean isImported() {
 		return imported;
-	}
-
-	public void setImported(boolean imported) {
-		this.imported = imported;
 	}
 
 }

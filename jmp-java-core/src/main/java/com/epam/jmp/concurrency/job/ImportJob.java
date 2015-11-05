@@ -1,8 +1,7 @@
 package com.epam.jmp.concurrency.job;
 
-import static com.epam.jmp.util.Config.ERROR_FOLDER;
-import static com.epam.jmp.util.Config.READ_TIMEOUT;
-import static com.epam.jmp.util.Config.THREADS_COUNT;
+import static java.util.stream.Collectors.joining;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,52 +10,72 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-import com.epam.jmp.concurrency.files.FilesReader;
-import com.epam.jmp.concurrency.model.service.NewsService;
-import com.epam.jmp.util.Config;
+import com.epam.jmp.concurrency.service.NewsService;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
+@Component("importJob")
 public class ImportJob implements Runnable {
 	private static final Logger LOG = LogManager.getLogger(ImportJob.class);
-	private final ScheduledExecutorService scheduler;
+
+	@Value("${common.input.folder.read.timeout:5}")
+	private Long readTimeout;
+
+	@Value("${common.error.folder}")
+	private String errorFolder;
+
+	@Value("${common.input.folder.threads}")
+	private String threadCountStr;
+
 	private final FilesReader filesReader;
 	private final NewsService newsService;
+	private final ScheduledExecutorService scheduler;
 	private final ExecutorService executor;
 
+	@Autowired
 	public ImportJob(FilesReader filesReader, NewsService newsService) {
 		this.filesReader = filesReader;
 		this.newsService = newsService;
-		scheduler = Executors.newSingleThreadScheduledExecutor(run -> {
-			Thread t = new Thread(run, "TransactionReader");
-			t.setDaemon(true);
-			return t;
-		});
-		int threadsCount = Integer.parseInt(Config.INST.prop(THREADS_COUNT));
-		this.executor = Executors.newFixedThreadPool(threadsCount);
+		scheduler = Executors.newSingleThreadScheduledExecutor(threadFactory("import-schedule-%d"));
+		executor = Executors.newFixedThreadPool(getThreadCount(), threadFactory("import-worker-%d"));
+	}
+
+	private ThreadFactory threadFactory(String nameFormat) {
+		return new ThreadFactoryBuilder()
+				.setDaemon(true)
+				.setNameFormat(nameFormat)
+				.build();
+	}
+
+	private int getThreadCount() {
+		return isBlank(threadCountStr)
+				? Runtime.getRuntime().availableProcessors()
+				: Integer.parseInt(threadCountStr);
 	}
 
 	@Override
 	public void run() {
-		long readTimeout = Long.parseLong(Config.INST.prop(READ_TIMEOUT));
-		Path errorDir = Paths.get(Config.INST.prop(ERROR_FOLDER));
-		scheduler.scheduleWithFixedDelay(new Runnable() {
-
-			@Override
-			public void run() {
-				LOG.info("Import started");
-				List<Path> files = filesReader.readFiles();
-				LOG.info(files.size() + " files to import");
-				files.forEach(file -> {
-					Callable<Boolean> importTast = new NewsImportProcessor(file, errorDir,
-							newsService);
-					executor.submit(importTast);
-				});
-			}
-
-		}, readTimeout, readTimeout, TimeUnit.SECONDS);
+		Path errorDir = Paths.get(errorFolder);
+		scheduler.scheduleWithFixedDelay(() -> {
+			LOG.info("Import started");
+			List<Path> files = filesReader.readFiles();
+			String filesString = files.stream()
+					.map(Path::getFileName)
+					.map(Path::toString)
+					.collect(joining(", "));
+			LOG.info(files.size() + " files to import: " + filesString);
+			files.forEach(file -> {
+				Callable<Boolean> importTask = new NewsImportProcessor(file, errorDir, newsService);
+				executor.submit(importTask);
+			});
+		}, 0, readTimeout, TimeUnit.SECONDS);
 	}
 }

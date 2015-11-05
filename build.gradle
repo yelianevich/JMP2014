@@ -41,6 +41,7 @@ subprojects {
 		jbehaveVersion = '3.9.5'
 		slf4jVersion = '1.7.9'
 		slf4jLog4j12Version = '1.7.10'
+		commonsLang3Version = '3.4'
 	}
 
 	compileJava {
@@ -93,5 +94,5 @@ subprojects {
 
 task wrapper(type: Wrapper) {
 	description = 'Generate generic scripts to run on *nix and Windows'
-	gradleVersion = '2.3'
+	gradleVersion = '2.7'
 }

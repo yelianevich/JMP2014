@@ -1,4 +1,4 @@
-package com.epam.jmp.concurrency.files;
+package com.epam.jmp.concurrency.job;
 
 import java.nio.file.Path;
 import java.util.List;

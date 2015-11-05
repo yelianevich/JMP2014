@@ -1,5 +1,6 @@
 package com.epam.jmp.util;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -9,42 +10,52 @@ import java.nio.file.Paths;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(JUnit4.class)
+import com.epam.jmp.concurrency.config.ConcurrencyConfig;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = ConcurrencyConfig.class)
 public class ConfigTest {
 
+	@Autowired
+	private Environment env;
+	
 	@Test
 	public void shouldInitBundelCorretly() throws Exception {
-		Config config = Config.INST;
-		assertThat(config, notNullValue());
+		assertThat(env, notNullValue());
 	}
 
 	@Test
 	public void shouldReturnInputFolder() {
-		String pathStr = Config.INST.prop(Config.INPUT_FOLDER);
+		String pathStr = env.getProperty(Constants.INPUT_FOLDER);
 		Path path = Paths.get(pathStr);
 		assertThat(path, notNullValue());
 	}
 
 	@Test
 	public void shouldReturnErrorFolder() throws Exception {
-		String pathStr = Config.INST.prop(Config.ERROR_FOLDER);
+		String pathStr = env.getProperty(Constants.ERROR_FOLDER);
 		Path path = Paths.get(pathStr);
 		assertThat(path, notNullValue());
 	}
 
 	@Test
 	public void shouldReturnPositiveReadTimeout() throws Exception {
-		String readTimeoutStr = Config.INST.prop(Config.READ_TIMEOUT);
+		String readTimeoutStr = env.getProperty(Constants.READ_TIMEOUT);
 		int timeout = Integer.parseInt(readTimeoutStr, 10);
 		assertThat(timeout, greaterThan(0));
 	}
 
 	@Test
-	public void shouldReturnPositiveThreadCount() throws Exception {
-		String threadCountStr = Config.INST.prop(Config.THREADS_COUNT);
-		int threadCount = Integer.parseInt(threadCountStr, 10);
+	public void shouldReturnPositiveThreadCountOrBlank() throws Exception {
+		String threadCountStr = env.getProperty(Constants.THREADS_COUNT);
+		int threadCount = isNotBlank(threadCountStr)
+				? Integer.parseInt(threadCountStr)
+				: 4;
 		assertThat(threadCount, greaterThan(0));
 	}
 

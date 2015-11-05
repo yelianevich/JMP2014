@@ -1,12 +1,14 @@
-package com.epam.jmp.concurrency.model.dao;
+package com.epam.jmp.concurrency.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import com.epam.jmp.concurrency.model.News;
 
+@Component("newsMapper")
 public class NewsMapper implements RowMapper<News> {
 
 	@Override
