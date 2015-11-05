@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.epam.jmp.classloading.loader.ModuleEngine;
+import com.epam.jmp.classloading.loader.impl.MathModuleEngine;
 import com.epam.jmp.classloading.module.MathModule;
 
 public class Runner {
@@ -19,7 +20,7 @@ public class Runner {
 	public static void main(String[] args) {
 		String jarPath = args[0];
 
-		ModuleEngine engine = new ModuleEngine(jarPath);
+		ModuleEngine<MathModule> engine = new MathModuleEngine(jarPath);
 		Map<String, MathModule> modules = Collections.emptyMap();
 		modules = engine.loadModules();
 
