@@ -5,8 +5,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.epam.jmp.concurrency.config.ConcurrencyConfig;
+import com.epam.jmp.concurrency.dao.NewsDao;
 import com.epam.jmp.concurrency.model.News;
-import com.epam.jmp.concurrency.model.dao.NewsDao;
 
 public final class TablesCreator {
 

@@ -1,4 +1,4 @@
-package com.epam.jmp.concurrency.model.dao;
+package com.epam.jmp.concurrency.dao;
 
 import java.util.List;
 

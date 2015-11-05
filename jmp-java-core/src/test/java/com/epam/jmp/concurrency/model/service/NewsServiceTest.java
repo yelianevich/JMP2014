@@ -12,8 +12,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.epam.jmp.concurrency.dao.NewsDao;
 import com.epam.jmp.concurrency.model.News;
-import com.epam.jmp.concurrency.model.dao.NewsDao;
+import com.epam.jmp.concurrency.service.LocalNewsService;
+import com.epam.jmp.concurrency.service.NewsService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NewsServiceTest {

@@ -5,6 +5,7 @@ dependencies {
 	compile "org.springframework:spring-context:$springVersion"
 	compile "org.springframework:spring-jdbc:$springVersion"
 	compile "org.springframework:spring-beans:$springVersion"
+	compile "org.springframework:spring-test:$springVersion"
 	compile "org.hsqldb:hsqldb:$hsqldbVersion"
 	compile "com.google.guava:guava:$guavaVersion"
 	compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion"

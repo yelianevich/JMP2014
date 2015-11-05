@@ -23,8 +23,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.epam.jmp.concurrency.job.NewsImportProcessor;
 import com.epam.jmp.concurrency.model.News;
-import com.epam.jmp.concurrency.model.service.LocalNewsService;
-import com.epam.jmp.concurrency.model.service.NewsService;
+import com.epam.jmp.concurrency.service.LocalNewsService;
+import com.epam.jmp.concurrency.service.NewsService;
 import com.epam.jmp.test.util.TestData;
 
 @RunWith(MockitoJUnitRunner.class)

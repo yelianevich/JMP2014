@@ -1,10 +1,10 @@
-package com.epam.jmp.concurrency.model.service;
+package com.epam.jmp.concurrency.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.epam.jmp.concurrency.dao.NewsDao;
 import com.epam.jmp.concurrency.model.News;
-import com.epam.jmp.concurrency.model.dao.NewsDao;
 
 @Service
 public class LocalNewsService implements NewsService {
