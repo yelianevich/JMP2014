@@ -2,14 +2,22 @@ package com.epam.jmp.concurrency.model.dao;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import com.epam.jmp.concurrency.model.News;
 
+@Repository
 public class HsqldbNewsDao implements NewsDao {
+
+	@Autowired
 	private JdbcTemplate jdbc;
+
+	@Autowired
 	private RowMapper<News> newsMapper;
+
 	private static final String MERGE_NEWS =
 		"MERGE INTO news USING (VALUES ?, ?, ?, ?) rec (id, title, short_text, full_text) "
 		+ "ON (news.id = rec.id) "
@@ -27,14 +35,12 @@ public class HsqldbNewsDao implements NewsDao {
 
 	@Override
 	public News getNewsById(int id) {
-		News news = jdbc.queryForObject(SELECT_NEWS_BY_ID, new Object[] {id}, newsMapper);
-		return news;
+		return jdbc.queryForObject(SELECT_NEWS_BY_ID, new Object[] {id}, newsMapper);
 	}
 
 	@Override
 	public List<News> getNews() {
-		List<News> newsList = jdbc.query(SELECT_NEWS, newsMapper);
-		return newsList;
+		return jdbc.query(SELECT_NEWS, newsMapper);
 	}
 
 	public void setJdbc(JdbcTemplate jdbc) {

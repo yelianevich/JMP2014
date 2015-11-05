@@ -1,6 +1,6 @@
 package com.epam.jmp.concurrency.job;
 
-import static java.nio.file.StandardCopyOption.ATOMIC_MOVE;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,7 +19,7 @@ public final class Cleaner {
 		boolean moved = false;
 		LOG.error(file + " is not valid. Move to error folder.", e);
 		try {
-			Files.move(file, errorDir.resolve(file.getFileName()), ATOMIC_MOVE);
+			Files.move(file, errorDir.resolve(file.getFileName()), REPLACE_EXISTING);
 			moved = true;
 		} catch (IOException e1) {
 			LOG.error("Cannot move file " + file, e);
