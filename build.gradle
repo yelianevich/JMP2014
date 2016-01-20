@@ -29,7 +29,7 @@ subprojects {
 	ext {
 		bootVersion = '1.2.0.RELEASE'
 		hsqldbVersion = '2.3.2'
-		springVersion = '4.1.1.RELEASE'
+		springVersion = '4.2.4.RELEASE'
 		guavaVersion = '18.0'
 		hamcrestVersion = '1.3'
 		junitVersion = '4.12'
@@ -94,5 +94,5 @@ subprojects {
 
 task wrapper(type: Wrapper) {
 	description = 'Generate generic scripts to run on *nix and Windows'
-	gradleVersion = '2.7'
+	gradleVersion = '2.10'
 }

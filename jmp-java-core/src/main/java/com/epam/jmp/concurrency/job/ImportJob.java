@@ -1,7 +1,6 @@
 package com.epam.jmp.concurrency.job;
 
 import static java.util.stream.Collectors.joining;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,6 +11,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
+
+import javax.annotation.PostConstruct;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,20 +33,24 @@ public class ImportJob implements Runnable {
 	@Value("${common.error.folder}")
 	private String errorFolder;
 
-	@Value("${common.input.folder.threads}")
-	private String threadCountStr;
+	@Value("#{${common.input.folder.threads} ?: T(Runtime).getRuntime().availableProcessors()}")
+	private int threadCount;
 
 	private final FilesReader filesReader;
 	private final NewsService newsService;
-	private final ScheduledExecutorService scheduler;
-	private final ExecutorService executor;
+	private ScheduledExecutorService scheduler;
+	private ExecutorService executor;
 
 	@Autowired
 	public ImportJob(FilesReader filesReader, NewsService newsService) {
 		this.filesReader = filesReader;
 		this.newsService = newsService;
+	}
+
+	@PostConstruct
+	public void init() {
 		scheduler = Executors.newSingleThreadScheduledExecutor(threadFactory("import-schedule-%d"));
-		executor = Executors.newFixedThreadPool(getThreadCount(), threadFactory("import-worker-%d"));
+		executor = Executors.newFixedThreadPool(threadCount, threadFactory("import-worker-%d"));
 	}
 
 	private ThreadFactory threadFactory(String nameFormat) {
@@ -53,12 +58,6 @@ public class ImportJob implements Runnable {
 				.setDaemon(true)
 				.setNameFormat(nameFormat)
 				.build();
-	}
-
-	private int getThreadCount() {
-		return isBlank(threadCountStr)
-				? Runtime.getRuntime().availableProcessors()
-				: Integer.parseInt(threadCountStr);
 	}
 
 	@Override
