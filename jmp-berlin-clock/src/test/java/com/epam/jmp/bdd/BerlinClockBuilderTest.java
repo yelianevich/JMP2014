@@ -1,18 +1,19 @@
 package com.epam.jmp.bdd;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import static com.epam.jmp.bdd.TextBerlinClockBuilder.NEW_ROW;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Before;
-import org.junit.Test;
-
 public class BerlinClockBuilderTest {
-    private static final String OFF_CLOCK = "O\r\nOOOO\r\nOOOO\r\nOOOOOOOOOOO\r\nOOOO";
-    private static final String CLOCK_2_SECONDS = "Y\r\nOOOO\r\nOOOO\r\nOOOOOOOOOOO\r\nOOOO";
-    private static final String CLOCK_6_HOUR = "O\r\nROOO\r\nROOO\r\nOOOOOOOOOOO\r\nOOOO";
-    private static final String CLOCK_26_MINUTES = "O\r\nOOOO\r\nOOOO\r\nYYRYYOOOOOO\r\nYOOO";
-    private static final String CLOCK_6H_26M_2S = "Y\r\nROOO\r\nROOO\r\nYYRYYOOOOOO\r\nYOOO";
+    private static final String OFF_CLOCK = String.format("O%1$sOOOO%1$sOOOO%1$sOOOOOOOOOOO%1$sOOOO", NEW_ROW);
+    private static final String CLOCK_2_SECONDS = String.format("Y%1$sOOOO%1$sOOOO%1$sOOOOOOOOOOO%1$sOOOO", NEW_ROW);
+    private static final String CLOCK_6_HOUR = String.format("O%1$sROOO%1$sROOO%1$sOOOOOOOOOOO%1$sOOOO", NEW_ROW);
+    private static final String CLOCK_26_MINUTES = String.format("O%1$sOOOO%1$sOOOO%1$sYYRYYOOOOOO%1$sYOOO", NEW_ROW);
+    private static final String CLOCK_6H_26M_2S = String.format("Y%1$sROOO%1$sROOO%1$sYYRYYOOOOOO%1$sYOOO", NEW_ROW);
     private BerlinClockBuilder<String> clockBuilder;
 
     @Before

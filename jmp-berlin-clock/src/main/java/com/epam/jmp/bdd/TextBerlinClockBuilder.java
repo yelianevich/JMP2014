@@ -3,10 +3,11 @@ package com.epam.jmp.bdd;
 import java.util.Arrays;
 
 public class TextBerlinClockBuilder implements BerlinClockBuilder<String> {
+    public static final String NEW_ROW = System.lineSeparator();
+
     private static final char RED = 'R';
     private static final char YELLOW = 'Y';
     private static final char OFF = 'O';
-    private static final String NEW_ROW = System.lineSeparator();
 
     private char[] secondsLamp = new char[1];
     private char[] fiveHoursRedLamps = new char[4];
@@ -72,13 +73,11 @@ public class TextBerlinClockBuilder implements BerlinClockBuilder<String> {
 
     @Override
     public String clock() {
-        return new StringBuilder()
-            .append(secondsLamp).append(NEW_ROW)
-            .append(fiveHoursRedLamps).append(NEW_ROW)
-            .append(oneHourRedLamps).append(NEW_ROW)
-            .append(fiveMinutesYellowRedLamps).append(NEW_ROW)
-            .append(oneMinuteYellowLamps)
-            .toString();
+        return String.valueOf(secondsLamp) + NEW_ROW +
+                String.valueOf(fiveHoursRedLamps) + NEW_ROW +
+                String.valueOf(oneHourRedLamps) + NEW_ROW +
+                String.valueOf(fiveMinutesYellowRedLamps) + NEW_ROW +
+                String.valueOf(oneMinuteYellowLamps);
     }
 
 }

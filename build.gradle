@@ -1,16 +1,6 @@
-apply plugin: 'sonar-runner'
-
-sonarRunner {
-    sonarProperties {
-        property 'sonar.projectName', 'jmp'
-        property 'sonar.projectDescription', 'Java mentoring program training tasks'
-        property "sonar.java.coveragePlugin", "jacoco"
-    }
-}
-
 allprojects {
     defaultTasks 'build'
-    apply plugin: 'eclipse'
+    apply plugin: 'idea'
 
     group = "com.epam.jmp"
     version = '0.1-SNAPSHOT'
@@ -27,7 +17,7 @@ subprojects {
     apply from: "$rootDir/gradle/jacoco.gradle"
 
     ext {
-        bootVersion = '1.2.0.RELEASE'
+        bootVersion = '1.5.3.RELEASE'
         hsqldbVersion = '2.3.2'
         springVersion = '4.2.4.RELEASE'
         guavaVersion = '18.0'
@@ -47,11 +37,13 @@ subprojects {
     compileJava {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
+        options.encoding = 'UTF-8'
     }
 
     compileTestJava {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
+        options.encoding = 'UTF-8'
     }
 
     dependencies {
@@ -85,14 +77,10 @@ subprojects {
     }
     test.addTestListener(new com.epam.jmp.NotificationTestListener(project))
 
-    sonarRunner {
-        sonarProperties {
-            property 'sonar.sourceEncoding', 'UTF-8'
-        }
-    }
+
 }
 
 task wrapper(type: Wrapper) {
     description = 'Generate generic scripts to run on *nix and Windows'
-    gradleVersion = '2.10'
+    gradleVersion = '3.5'
 }

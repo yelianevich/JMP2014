@@ -1,13 +1,6 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:$bootVersion"
-    }
+plugins {
+    id 'org.springframework.boot' version "1.5.3.RELEASE"
 }
-
-apply plugin: 'spring-boot'
 
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:$bootVersion"
