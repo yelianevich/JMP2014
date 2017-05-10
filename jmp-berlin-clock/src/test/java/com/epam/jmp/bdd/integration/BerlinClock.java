@@ -13,21 +13,21 @@ import org.jbehave.core.steps.ParameterConverters.DateConverter;
 
 public final class BerlinClock extends JUnitStory {
 
-	@Override
-	public InjectableStepsFactory stepsFactory() {
-		return new InstanceStepsFactory(configuration(), new BerlinClockFixture());
-	}
+    @Override
+    public InjectableStepsFactory stepsFactory() {
+        return new InstanceStepsFactory(configuration(), new BerlinClockFixture());
+    }
 
-	@Override
-	public Configuration configuration() {
-		return new MostUsefulConfiguration()
-				.useStoryLoader(new LoadFromClasspath(this.getClass()))
-				.useParameterConverters(new ParameterConverters().addConverters(new DateConverter()))
-				.useStoryReporterBuilder(
-						new StoryReporterBuilder()
-							.withDefaultFormats()
-							.withFormats(Format.CONSOLE, Format.HTML)
-							.withFailureTrace(true));
-	}
+    @Override
+    public Configuration configuration() {
+        return new MostUsefulConfiguration()
+                .useStoryLoader(new LoadFromClasspath(this.getClass()))
+                .useParameterConverters(new ParameterConverters().addConverters(new DateConverter()))
+                .useStoryReporterBuilder(
+                        new StoryReporterBuilder()
+                            .withDefaultFormats()
+                            .withFormats(Format.CONSOLE, Format.HTML)
+                            .withFailureTrace(true));
+    }
 
 }

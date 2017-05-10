@@ -9,22 +9,22 @@ import com.epam.jmp.concurrency.model.News;
 @Service
 public class LocalNewsService implements NewsService {
 
-	@Autowired
-	private NewsDao newsDao;
+    @Autowired
+    private NewsDao newsDao;
 
-	public LocalNewsService() {
-	}
+    public LocalNewsService() {
+    }
 
-	public LocalNewsService(NewsDao newsDao) {
-		this.newsDao = newsDao;
-	}
+    public LocalNewsService(NewsDao newsDao) {
+        this.newsDao = newsDao;
+    }
 
-	@Override
-	public boolean upsertNews(News news) {
-		return newsDao.mergeNews(news);
-	}
+    @Override
+    public boolean upsertNews(News news) {
+        return newsDao.mergeNews(news);
+    }
 
-	public void setNewsDao(NewsDao newsDao) {
-		this.newsDao = newsDao;
-	}
+    public void setNewsDao(NewsDao newsDao) {
+        this.newsDao = newsDao;
+    }
 }

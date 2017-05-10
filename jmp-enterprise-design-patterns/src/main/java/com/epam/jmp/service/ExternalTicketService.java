@@ -6,8 +6,8 @@ import com.epam.jmp.model.Cinema;
 
 public interface ExternalTicketService {
 
-	List<Cinema> getTicketInfo();
+    List<Cinema> getTicketInfo();
 
-	boolean processPurchase(Cinema cinema);
+    boolean processPurchase(Cinema cinema);
 
 }

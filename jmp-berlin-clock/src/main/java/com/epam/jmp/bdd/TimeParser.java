@@ -4,6 +4,6 @@ import java.time.LocalTime;
 
 public interface TimeParser {
 
-	LocalTime parse(String time);
+    LocalTime parse(String time);
 
 }

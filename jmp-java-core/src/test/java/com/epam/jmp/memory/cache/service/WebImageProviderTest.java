@@ -10,14 +10,14 @@ import org.junit.Test;
 
 public class WebImageProviderTest {
 
-	private static final String TRICKY = "https://upload.wikimedia.org/wikipedia/commons/d/df/Tricky_%40_INmusic_festival.jpg";
-	private ImageProvider provider = new WebImageProvider();
+    private static final String TRICKY = "https://upload.wikimedia.org/wikipedia/commons/d/df/Tricky_%40_INmusic_festival.jpg";
+    private ImageProvider provider = new WebImageProvider();
 
-	@Test
-	public void shouldReturnExistingImage() {
-		Image image = provider.loadImage(TRICKY);
-		assertThat(image, notNullValue());
-		assertThat(image, isA(Image.class));
-	}
+    @Test
+    public void shouldReturnExistingImage() {
+        Image image = provider.loadImage(TRICKY);
+        assertThat(image, notNullValue());
+        assertThat(image, isA(Image.class));
+    }
 
 }

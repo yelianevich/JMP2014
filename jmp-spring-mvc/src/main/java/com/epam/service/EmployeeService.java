@@ -12,29 +12,29 @@ import com.epam.model.Employee;
 @Service
 public interface EmployeeService {
 
-	List<Employee> findByName(String name);
+    List<Employee> findByName(String name);
 
-	<S extends Employee> S save(S entity);
+    <S extends Employee> S save(S entity);
 
-	Iterable<Employee> findAll(Sort sort);
+    Iterable<Employee> findAll(Sort sort);
 
-	<S extends Employee> Iterable<S> save(Iterable<S> entities);
+    <S extends Employee> Iterable<S> save(Iterable<S> entities);
 
-	Page<Employee> findAll(Pageable pageable);
+    Page<Employee> findAll(Pageable pageable);
 
-	Employee findOne(Long id);
+    Employee findOne(Long id);
 
-	boolean exists(Long id);
+    boolean exists(Long id);
 
-	Iterable<Employee> findAll();
+    Iterable<Employee> findAll();
 
-	Iterable<Employee> findAll(Iterable<Long> ids);
+    Iterable<Employee> findAll(Iterable<Long> ids);
 
-	void delete(Long id);
+    void delete(Long id);
 
-	void delete(Employee entity);
+    void delete(Employee entity);
 
-	void delete(Iterable<? extends Employee> entities);
+    void delete(Iterable<? extends Employee> entities);
 
-	void deleteAll();
+    void deleteAll();
 }

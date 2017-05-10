@@ -11,10 +11,10 @@ import com.epam.jmp.util.UtilTests;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-		ClassLoadingTests.class,
-		ConcurrencyTests.class,
-		MemoryManagementTests.class,
-		UtilTests.class })
+        ClassLoadingTests.class,
+        ConcurrencyTests.class,
+        MemoryManagementTests.class,
+        UtilTests.class })
 public class JmpSuite {
 
 }

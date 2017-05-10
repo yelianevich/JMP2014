@@ -5,8 +5,8 @@ import com.epam.jmp.concurrency.model.News;
 
 public interface NewsService {
 
-	boolean upsertNews(News news);
+    boolean upsertNews(News news);
 
-	void setNewsDao(NewsDao dao);
+    void setNewsDao(NewsDao dao);
 
 }

@@ -1,16 +1,16 @@
 buildscript {
-	repositories {
-		jcenter()
-	}
-	dependencies {
-		classpath "org.springframework.boot:spring-boot-gradle-plugin:$bootVersion"
-	}
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$bootVersion"
+    }
 }
 
 apply plugin: 'spring-boot'
 
 dependencies {
-	compile "org.springframework.boot:spring-boot-starter-web:$bootVersion"
-	compile "org.springframework.boot:spring-boot-starter-data-jpa:$bootVersion"
-	compile "org.hsqldb:hsqldb:$hsqldbVersion"
+    compile "org.springframework.boot:spring-boot-starter-web:$bootVersion"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:$bootVersion"
+    compile "org.hsqldb:hsqldb:$hsqldbVersion"
 }

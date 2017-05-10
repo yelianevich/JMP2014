@@ -1,18 +1,18 @@
 apply plugin: 'jacoco'
 
 jacoco {
-	toolVersion = "0.7.4.201502262128"
-	reportsDir = file("$buildDir/reports/jacoco")
+    toolVersion = "0.7.4.201502262128"
+    reportsDir = file("$buildDir/reports/jacoco")
 }
 
 jacocoTestReport {
-	group = "Reporting"
-	description = "Generate JaCoCo reports after running tests."
-	reports {
-		xml.enabled = false
-		csv.enabled = false
-		html.enabled = true
-	}
+    group = "Reporting"
+    description = "Generate JaCoCo reports after running tests."
+    reports {
+        xml.enabled = false
+        csv.enabled = false
+        html.enabled = true
+    }
 }
 jacocoTestReport.dependsOn test
 check.dependsOn jacocoTestReport

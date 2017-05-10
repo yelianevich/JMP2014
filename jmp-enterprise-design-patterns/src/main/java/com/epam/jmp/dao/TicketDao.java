@@ -5,8 +5,8 @@ import com.epam.jmp.model.TicketStore;
 
 public interface TicketDao {
 
-	TicketStore getTicketInfo();
+    TicketStore getTicketInfo();
 
-	boolean processPurchase(Cinema cinema);
+    boolean processPurchase(Cinema cinema);
 
 }

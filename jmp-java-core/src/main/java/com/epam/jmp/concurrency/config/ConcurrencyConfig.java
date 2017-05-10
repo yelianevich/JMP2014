@@ -23,28 +23,28 @@ import com.epam.jmp.concurrency.job.FolderReader;
 @PropertySource("classpath:jmp.properties")
 public class ConcurrencyConfig {
 
-	@Autowired
-	private Environment env;
+    @Autowired
+    private Environment env;
 
-	@Bean
-	public JdbcTemplate jdbcTemplate() {
-		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-		dataSource.setDriverClass(org.hsqldb.jdbcDriver.class);
-		dataSource.setUsername(env.getProperty(DB_USER));
-		dataSource.setUrl(env.getProperty(DB_URL));
-		dataSource.setPassword(env.getProperty(DB_PASSWORD));
-		return new JdbcTemplate(dataSource);
-	}
+    @Bean
+    public JdbcTemplate jdbcTemplate() {
+        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+        dataSource.setDriverClass(org.hsqldb.jdbcDriver.class);
+        dataSource.setUsername(env.getProperty(DB_USER));
+        dataSource.setUrl(env.getProperty(DB_URL));
+        dataSource.setPassword(env.getProperty(DB_PASSWORD));
+        return new JdbcTemplate(dataSource);
+    }
 
-	@Bean
-	public FilesReader filesReader() {
-		String dir = env.getProperty(INPUT_FOLDER);
-		return new FolderReader(dir); 
-	}
+    @Bean
+    public FilesReader filesReader() {
+        String dir = env.getProperty(INPUT_FOLDER);
+        return new FolderReader(dir);
+    }
 
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
 
 }

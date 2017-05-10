@@ -10,22 +10,22 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TimeParserTest {
-	private TimeParser timeParser;
+    private TimeParser timeParser;
 
-	@Before
-	public void setUp() throws Exception {
-		timeParser = new IsoTimeParser();
-	}
+    @Before
+    public void setUp() throws Exception {
+        timeParser = new IsoTimeParser();
+    }
 
-	@Test(expected = RuntimeException.class)
-	public void shouldThrowExceptionOnIllegalHours() {
-		timeParser.parse("24:00:00");
-	}
-	
-	public void shouldThrowExceptionOnIllegalMinutes() {
-		LocalTime parsedTime = timeParser.parse("05:50:20");
-		LocalTime time = LocalTime.of(5, 50, 20);
-		assertThat(parsedTime, is(equalTo(time)));
-	}
+    @Test(expected = RuntimeException.class)
+    public void shouldThrowExceptionOnIllegalHours() {
+        timeParser.parse("24:00:00");
+    }
+
+    public void shouldThrowExceptionOnIllegalMinutes() {
+        LocalTime parsedTime = timeParser.parse("05:50:20");
+        LocalTime time = LocalTime.of(5, 50, 20);
+        assertThat(parsedTime, is(equalTo(time)));
+    }
 
 }

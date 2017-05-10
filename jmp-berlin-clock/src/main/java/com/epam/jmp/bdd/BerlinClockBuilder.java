@@ -2,12 +2,12 @@ package com.epam.jmp.bdd;
 
 public interface BerlinClockBuilder<T> {
 
-	T clock();
+    T clock();
 
-	BerlinClockBuilder<T> second(int seconds);
+    BerlinClockBuilder<T> second(int seconds);
 
-	BerlinClockBuilder<T> hour(int hours);
+    BerlinClockBuilder<T> hour(int hours);
 
-	BerlinClockBuilder<T> minute(int mins);
+    BerlinClockBuilder<T> minute(int mins);
 
 }

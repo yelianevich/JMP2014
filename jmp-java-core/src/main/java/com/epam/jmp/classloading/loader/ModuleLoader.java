@@ -10,53 +10,53 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class ModuleLoader extends ClassLoader {
-	private static final Logger LOG = LogManager.getLogger(ModuleLoader.class
-			.getName());
-	private String jarPath;
+    private static final Logger LOG = LogManager.getLogger(ModuleLoader.class
+            .getName());
+    private String jarPath;
 
-	public ModuleLoader(String jarPath) {
-		this.jarPath = jarPath;
-	}
+    public ModuleLoader(String jarPath) {
+        this.jarPath = jarPath;
+    }
 
-	public ModuleLoader(String jarPath, ClassLoader parent) {
-		super(parent);
-		this.jarPath = jarPath;
-	}
+    public ModuleLoader(String jarPath, ClassLoader parent) {
+        super(parent);
+        this.jarPath = jarPath;
+    }
 
-	public Class<?> findClass(String name) {
-		try {
-			String pathToClass = name.replace('.', '/') + ".class";
-			byte[] clazzBytes = fetchFromJar(pathToClass);
-			return defineClass(name, clazzBytes, 0, clazzBytes.length);
-		} catch (ClassFormatError e) {
-			LOG.error("Class is corrupted", e);
-		}
-		return null;
-	}
+    public Class<?> findClass(String name) {
+        try {
+            String pathToClass = name.replace('.', '/') + ".class";
+            byte[] clazzBytes = fetchFromJar(pathToClass);
+            return defineClass(name, clazzBytes, 0, clazzBytes.length);
+        } catch (ClassFormatError e) {
+            LOG.error("Class is corrupted", e);
+        }
+        return null;
+    }
 
-	private byte[] fetchFromJar(String name) {
-		byte[] clazzBytes = null;
-		try (JarFile jarFile = new JarFile(jarPath)) {
-			JarEntry clazzEntry = jarFile
-						.stream()
-						.filter(je -> je.getName().equals(name))
-						.findFirst()
-						.get();
-			try (InputStream in = jarFile.getInputStream(clazzEntry);
-					BufferedInputStream is = new BufferedInputStream(in)) {
-				int size = (int) clazzEntry.getSize();
-				clazzBytes = new byte[size];
+    private byte[] fetchFromJar(String name) {
+        byte[] clazzBytes = null;
+        try (JarFile jarFile = new JarFile(jarPath)) {
+            JarEntry clazzEntry = jarFile
+                        .stream()
+                        .filter(je -> je.getName().equals(name))
+                        .findFirst()
+                        .get();
+            try (InputStream in = jarFile.getInputStream(clazzEntry);
+                    BufferedInputStream is = new BufferedInputStream(in)) {
+                int size = (int) clazzEntry.getSize();
+                clazzBytes = new byte[size];
 
-				int offset = 0;
-				int numRead = 0;
-				while (offset < size && (numRead = is.read(clazzBytes, offset, size - offset)) >= 0) {
-					offset += numRead;
-				}
-			}
-		} catch (IOException e1) {
-			LOG.error("Cannot process jar file");
-		}
-		return clazzBytes;
-	}
+                int offset = 0;
+                int numRead = 0;
+                while (offset < size && (numRead = is.read(clazzBytes, offset, size - offset)) >= 0) {
+                    offset += numRead;
+                }
+            }
+        } catch (IOException e1) {
+            LOG.error("Cannot process jar file");
+        }
+        return clazzBytes;
+    }
 
 }

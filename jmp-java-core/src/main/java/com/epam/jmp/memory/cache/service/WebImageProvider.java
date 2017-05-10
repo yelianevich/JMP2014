@@ -10,18 +10,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class WebImageProvider implements ImageProvider {
-	private static final Logger LOG = LogManager.getLogger(WebImageProvider.class);
+    private static final Logger LOG = LogManager.getLogger(WebImageProvider.class);
 
-	@Override
-	public Image loadImage(String id) {
-		Image image = null;
-		try {
-			URL url = new URL(id);
-			image = ImageIO.read(url);
-		} catch (IOException e) {
-			LOG.error("Image could not be loaded from: " + id);
-		}
-		return image;
-	}
+    @Override
+    public Image loadImage(String id) {
+        Image image = null;
+        try {
+            URL url = new URL(id);
+            image = ImageIO.read(url);
+        } catch (IOException e) {
+            LOG.error("Image could not be loaded from: " + id);
+        }
+        return image;
+    }
 
 }

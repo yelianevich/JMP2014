@@ -6,7 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ ImageSoftDecoratorTest.class, ImageWeakCacheDecoratorTest.class,
-		WebImageProviderTest.class })
+        WebImageProviderTest.class })
 public class MemoryManagementTests {
 
 }

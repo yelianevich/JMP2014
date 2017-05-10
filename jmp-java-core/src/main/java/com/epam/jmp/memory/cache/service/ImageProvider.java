@@ -4,6 +4,6 @@ import java.awt.Image;
 
 public interface ImageProvider {
 
-	Image loadImage(String id);
+    Image loadImage(String id);
 
 }

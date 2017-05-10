@@ -29,38 +29,38 @@ import com.epam.jmp.test.util.TestData;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NewsImportProcessorTest {
-	private Logger LOG = LogManager.getLogger(LocalNewsService.class);
-	private NewsImportProcessor importProcessor;
-	private Path newsFile = Paths.get("tempXmlFile");
-	private Path errorDir = Paths.get("errorDir");
-	@Mock private NewsService newsService;
+    private Logger LOG = LogManager.getLogger(LocalNewsService.class);
+    private NewsImportProcessor importProcessor;
+    private Path newsFile = Paths.get("tempXmlFile");
+    private Path errorDir = Paths.get("errorDir");
+    @Mock private NewsService newsService;
 
-	@Before
-	public void setUp() throws Exception {
-		Files.deleteIfExists(newsFile);
-		newsFile = Files.write(newsFile, TestData.getNewsXmlStr(), StandardOpenOption.CREATE_NEW);
+    @Before
+    public void setUp() throws Exception {
+        Files.deleteIfExists(newsFile);
+        newsFile = Files.write(newsFile, TestData.getNewsXmlStr(), StandardOpenOption.CREATE_NEW);
 
-		Files.deleteIfExists(errorDir);
-		errorDir = Files.createDirectory(errorDir);
+        Files.deleteIfExists(errorDir);
+        errorDir = Files.createDirectory(errorDir);
 
-		given(newsService.upsertNews(any(News.class))).willAnswer((invocation) -> {
-			LOG.info("upsert " + invocation.getArguments()[0]);
-			return true;
-		});
-		importProcessor = new NewsImportProcessor(newsFile, errorDir, newsService);
-	}
+        given(newsService.upsertNews(any(News.class))).willAnswer((invocation) -> {
+            LOG.info("upsert " + invocation.getArguments()[0]);
+            return true;
+        });
+        importProcessor = new NewsImportProcessor(newsFile, errorDir, newsService);
+    }
 
-	@Test
-	public void shouldImportNews() {
-		Boolean imported = importProcessor.call();
-		assertThat(imported, is(true));
-		verify(newsService).upsertNews(any(News.class));
-	}
+    @Test
+    public void shouldImportNews() {
+        Boolean imported = importProcessor.call();
+        assertThat(imported, is(true));
+        verify(newsService).upsertNews(any(News.class));
+    }
 
-	@After
-	public void tearDown() throws IOException {
-		Files.deleteIfExists(newsFile);
-		Files.deleteIfExists(errorDir.resolve(newsFile));
-		Files.deleteIfExists(errorDir);
-	}
+    @After
+    public void tearDown() throws IOException {
+        Files.deleteIfExists(newsFile);
+        Files.deleteIfExists(errorDir.resolve(newsFile));
+        Files.deleteIfExists(errorDir);
+    }
 }

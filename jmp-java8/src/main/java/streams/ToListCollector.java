@@ -16,32 +16,32 @@ import java.util.stream.Collector;
 
 public final class ToListCollector<T> implements Collector<T, List<T>, List<T>> {
 
-	@Override
-	public BiConsumer<List<T>, T> accumulator() {
-		return List::add;
-	}
+    @Override
+    public BiConsumer<List<T>, T> accumulator() {
+        return List::add;
+    }
 
-	@Override
-	public Set<Characteristics> characteristics() {
-		return Collections.unmodifiableSet(EnumSet.of(IDENTITY_FINISH, CONCURRENT));
-	}
+    @Override
+    public Set<Characteristics> characteristics() {
+        return Collections.unmodifiableSet(EnumSet.of(IDENTITY_FINISH, CONCURRENT));
+    }
 
-	@Override
-	public BinaryOperator<List<T>> combiner() {
-		return (l1, l2) -> {
-			l1.addAll(l2);
-			return l1;
-		};
-	}
+    @Override
+    public BinaryOperator<List<T>> combiner() {
+        return (l1, l2) -> {
+            l1.addAll(l2);
+            return l1;
+        };
+    }
 
-	@Override
-	public Function<List<T>, List<T>> finisher() {
-		return Function.identity();
-	}
+    @Override
+    public Function<List<T>, List<T>> finisher() {
+        return Function.identity();
+    }
 
-	@Override
-	public Supplier<List<T>> supplier() {
-		return ArrayList::new;
-	}
+    @Override
+    public Supplier<List<T>> supplier() {
+        return ArrayList::new;
+    }
 
 }

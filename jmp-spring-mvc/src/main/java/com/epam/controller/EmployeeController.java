@@ -21,42 +21,42 @@ import com.epam.service.EmployeeService;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-	@Autowired
-	private EmployeeService employeeService;
+    @Autowired
+    private EmployeeService employeeService;
 
-	@RequestMapping(method = GET)
-	public Iterable<Employee> showEmployees() {
-		Iterable<Employee> employees = employeeService.findAll();
-		return employees;
-	}
+    @RequestMapping(method = GET)
+    public Iterable<Employee> showEmployees() {
+        Iterable<Employee> employees = employeeService.findAll();
+        return employees;
+    }
 
-	@RequestMapping(value = "/{id}", method = GET)
-	public Employee showEmployeeById(@PathVariable("id") Long id) {
-		Employee employee = employeeService.findOne(id);
-		return employee;
-	}
+    @RequestMapping(value = "/{id}", method = GET)
+    public Employee showEmployeeById(@PathVariable("id") Long id) {
+        Employee employee = employeeService.findOne(id);
+        return employee;
+    }
 
-	@RequestMapping(method = POST)
-	public Employee createEmployee(@RequestBody Employee employee) {
-		employee = employeeService.save(employee);
-		return employee;
-	}
+    @RequestMapping(method = POST)
+    public Employee createEmployee(@RequestBody Employee employee) {
+        employee = employeeService.save(employee);
+        return employee;
+    }
 
-	@RequestMapping(method = PUT)
-	public Employee updateEmployee(@RequestBody Employee employee) {
-		employee = employeeService.save(employee);
-		return employee;
-	}
+    @RequestMapping(method = PUT)
+    public Employee updateEmployee(@RequestBody Employee employee) {
+        employee = employeeService.save(employee);
+        return employee;
+    }
 
-	@RequestMapping(value = "/{id}", method = DELETE)
-	public void deleteEmployee(@PathVariable Long id) {
-		employeeService.delete(id);
-	}
+    @RequestMapping(value = "/{id}", method = DELETE)
+    public void deleteEmployee(@PathVariable Long id) {
+        employeeService.delete(id);
+    }
 
-	@RequestMapping(params="find=ByName", method = GET)
-	public List<Employee> findEMployeeByName(@RequestParam("name") String name) {
-		List<Employee> employees = employeeService.findByName(name);
-		return employees;
-	}
+    @RequestMapping(params="find=ByName", method = GET)
+    public List<Employee> findEMployeeByName(@RequestParam("name") String name) {
+        List<Employee> employees = employeeService.findByName(name);
+        return employees;
+    }
 
 }

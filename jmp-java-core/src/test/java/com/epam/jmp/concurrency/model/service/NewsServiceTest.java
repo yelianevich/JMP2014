@@ -20,22 +20,22 @@ import com.epam.jmp.concurrency.service.NewsService;
 @RunWith(MockitoJUnitRunner.class)
 public class NewsServiceTest {
 
-	private NewsService newsService;
-	@Mock
-	private NewsDao newsDao;
+    private NewsService newsService;
+    @Mock
+    private NewsDao newsDao;
 
-	@Before
-	public void setUp() throws Exception {
-		given(newsDao.mergeNews(any(News.class))).willReturn(true);
+    @Before
+    public void setUp() throws Exception {
+        given(newsDao.mergeNews(any(News.class))).willReturn(true);
 
-		newsService = new LocalNewsService(newsDao);
-	}
+        newsService = new LocalNewsService(newsDao);
+    }
 
-	@Test
-	public void test() {
-		boolean upserted = newsService.upsertNews(new News());
-		assertThat(upserted, is(true));
-		verify(newsDao).mergeNews(any(News.class));
-	}
+    @Test
+    public void test() {
+        boolean upserted = newsService.upsertNews(new News());
+        assertThat(upserted, is(true));
+        verify(newsDao).mergeNews(any(News.class));
+    }
 
 }

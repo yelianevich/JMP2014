@@ -6,10 +6,10 @@ import com.epam.jmp.concurrency.model.News;
 
 public interface NewsDao {
 
-	News getNewsById(int id);
+    News getNewsById(int id);
 
-	List<News> getNews();
+    List<News> getNews();
 
-	boolean mergeNews(News news);
+    boolean mergeNews(News news);
 
 }

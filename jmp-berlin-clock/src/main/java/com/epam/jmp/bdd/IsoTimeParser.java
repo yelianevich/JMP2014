@@ -5,9 +5,9 @@ import java.time.format.DateTimeFormatter;
 
 public class IsoTimeParser implements TimeParser {
 
-	@Override
-	public LocalTime parse(String time) {
-		return LocalTime.parse(time, DateTimeFormatter.ISO_TIME);
-	}
+    @Override
+    public LocalTime parse(String time) {
+        return LocalTime.parse(time, DateTimeFormatter.ISO_TIME);
+    }
 
 }

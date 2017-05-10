@@ -7,18 +7,18 @@ import com.epam.jmp.transaction.StateSaver;
 
 public class MegamagInMemoryDao implements TicketDao {
 
-	private TicketStore ticketData;
-	private StateSaver<Cinema> state;
+    private TicketStore ticketData;
+    private StateSaver<Cinema> state;
 
-	@Override
-	public TicketStore getTicketInfo() {
-		return ticketData;
-	}
+    @Override
+    public TicketStore getTicketInfo() {
+        return ticketData;
+    }
 
-	@Override
-	public boolean processPurchase(Cinema cinema) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean processPurchase(Cinema cinema) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
 }

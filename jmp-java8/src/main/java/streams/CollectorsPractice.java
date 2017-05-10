@@ -11,27 +11,27 @@ import data.PracticeData;
 
 public final class CollectorsPractice {
 
-	public static void main(String[] args) {
-		List<Transaction> transactions = PracticeData.getTransactions();
+    public static void main(String[] args) {
+        List<Transaction> transactions = PracticeData.getTransactions();
 
-		Stream<Trader> traders = transactions.stream()
-			.map(Transaction::getTrader)
-			.distinct();
+        Stream<Trader> traders = transactions.stream()
+            .map(Transaction::getTrader)
+            .distinct();
 
-		traders.collect(new ToListCollector<>()).forEach(System.out::println);;
-		// or (doesn't work for some reason with ArrayList::new)
-		traders.collect(ArrayList::new, List::add, List::addAll);
+        traders.collect(new ToListCollector<>()).forEach(System.out::println);;
+        // or (doesn't work for some reason with ArrayList::new)
+        traders.collect(ArrayList::new, List::add, List::addAll);
 
-		// using takeWhile = LongSummaryStatistics{count=100, sum=2807, min=24, average=28.070000, max=107}
-		// using filter = LongSummaryStatistics{count=100, sum=33640, min=305, average=336.400000, max=415}
-		LongSummaryStatistics testStats = LongStream.rangeClosed(1, 100)
-				.map(i -> {
-					Stream<Integer> primeTestRange = IntStream.range(2, 10_000).boxed();
-					long ms = System.currentTimeMillis();
-					primeTestRange.collect(new PrimeCollector());
-					return System.currentTimeMillis() - ms;})
-				.summaryStatistics();
-		System.out.println(testStats);
-	}
+        // using takeWhile = LongSummaryStatistics{count=100, sum=2807, min=24, average=28.070000, max=107}
+        // using filter = LongSummaryStatistics{count=100, sum=33640, min=305, average=336.400000, max=415}
+        LongSummaryStatistics testStats = LongStream.rangeClosed(1, 100)
+                .map(i -> {
+                    Stream<Integer> primeTestRange = IntStream.range(2, 10_000).boxed();
+                    long ms = System.currentTimeMillis();
+                    primeTestRange.collect(new PrimeCollector());
+                    return System.currentTimeMillis() - ms;})
+                .summaryStatistics();
+        System.out.println(testStats);
+    }
 
 }

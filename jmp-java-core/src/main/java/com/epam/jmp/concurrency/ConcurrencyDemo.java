@@ -8,14 +8,14 @@ import com.epam.jmp.concurrency.job.ImportJob;
 
 public final class ConcurrencyDemo {
 
-	public static void main(String[] args) throws InterruptedException {
-		ApplicationContext context = new AnnotationConfigApplicationContext(ConcurrencyConfig.class);
-		ImportJob importJob = context.getBean(ImportJob.class);
+    public static void main(String[] args) throws InterruptedException {
+        ApplicationContext context = new AnnotationConfigApplicationContext(ConcurrencyConfig.class);
+        ImportJob importJob = context.getBean(ImportJob.class);
 
-		importJob.run();
+        importJob.run();
 
-		// Emulate, that application is running
-		Thread.sleep(40 * 1000);
-	}
+        // Emulate, that application is running
+        Thread.sleep(40 * 1000);
+    }
 
 }

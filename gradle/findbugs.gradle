@@ -1,9 +1,9 @@
 apply plugin: 'findbugs'
 
 tasks.withType(FindBugs) {
-	reports {
-		xml.enabled = false
-		html.enabled = true
-	}
-	ignoreFailures = true
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+    ignoreFailures = true
 }
